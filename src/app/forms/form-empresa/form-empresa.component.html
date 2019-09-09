@@ -1,0 +1,155 @@
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="display-4">Datos Empresa</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <form class="example-form" [formGroup]="empresaForm" (ngSubmit)="saveEmpresa()">
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Nombre Empresa" formControlName="nombre">
+              </mat-form-field>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Razón social" formControlName="razon_social">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="RFC" formControlName="rfc">
+              </mat-form-field>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput [matDatepicker]="picker" placeholder="Fecha de creación" formControlName="fecha_creación">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h1 class="lead">Participación en las redes sociales</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Web de la Empresa" formControlName="web">
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Linkedin (Liga a su perfil)" formControlName="linkedin">
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Facebook (Liga a su perfil)" formControlName="facebook">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Twitter (Liga a su perfil)" formControlName="twitter">
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Instagram (Liga a su perfil)" formControlName="instagram">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h1 class="lead">Datos adicionales</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field class="w-100">
+              <textarea matInput placeholder="Describa brevemente la oferta de valor de su organización:" formControlName="descripcion_oferta_valor"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field class="w-100">
+              <mat-label>Sectores atendidos por su organización</mat-label>
+              <mat-select multiple formControlName="sectores_atendidos">
+                <mat-option *ngFor="let sector of sectoresA" [value]="sector.nombre_sector">{{sector.nombre_sector}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field class="w-100">
+              <textarea matInput placeholder="Menciona los 5 Principales clientes y sus sectores" formControlName="clientes_sectores"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field class="w-100">
+              <mat-label>Organizaciónes empresariales en las que participa y/o está afiliado</mat-label>
+              <mat-select multiple formControlName="orgs_afiliado">
+                <mat-option *ngFor="let org of organizacionesEmp" [value]="org.id_cat_oe">{{org.nombre_orgemp}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!--<div class="col-lg-4 col-md-4 col-sm-6">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Otra" formControlName="linkedin">
+            </mat-form-field>
+          </div>-->
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h1 class="lead">Cobertura</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12 m-auto">
+            <mat-form-field class="w-100">
+              <mat-label>Nacional (Seleccione qué estados de México)</mat-label>
+              <mat-select multiple formControlName="c_nacional">
+                <mat-option *ngFor="let estado of estados" [value]="estado.nombre_estado">{{estado.nombre_estado}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 m-auto">
+            <mat-form-field class="w-100">
+              <mat-label>Internacional (Seleccione qué paises)</mat-label>
+              <mat-select multiple formControlName="c_internacional">
+                <mat-option *ngFor="let pais of paises" [value]="pais.nombre_pais">{{pais.nombre_pais}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div> 
+        <div class="row">
+          <div class="col-12 text-right">
+            <button type="reset" class="btn btn-danger" style="width: 100px;">Limpiar</button>
+            <button type="submit" class="btn btn-success" style="margin-left: 10px; width: 100px;" [disabled]="empresaForm.invalid">Guardar</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="offset-lg-5 col-lg-1 offset-md-5 col-md-1 offset-sm-4 col-sm-2">
+            <mat-spinner *ngIf="saving"></mat-spinner>
+            <h1 class="lead text-danger" *ngIf="error">Error en registro</h1>
+          </div>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>

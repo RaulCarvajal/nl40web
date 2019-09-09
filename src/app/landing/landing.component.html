@@ -1,0 +1,64 @@
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100">
+  <div class="row">
+    <div class="col">
+      <h1 class="display-2">N.L. 4.0</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h1 class="display-4">Perfilamiento de Empresas TIC's</h1>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <img src="assets/bd.jpg" alt="BigData" class="img-fluid w-100">
+    </div>
+  </div>
+  <hr>
+  <br>
+  <div class="row">
+    <div class="col">
+        <p class="lead text-justify">
+            Industria 4.0 y su sinónimo Cuarta Revolución Industrial son expresiones que denominan una hipotética cuarta mega etapa de la evolución técnica-económica de la humanidad, contando a partir de la Primera Revolución Industrial. Habría comenzado recientemente y su desarrollo estaría proyectado hacia la segunda década del siglo XXI. La inteligencia artificial es señalada como elemento central de esta transformación, íntimamente relacionada a la acumulación creciente de grandes cantidades de datos (big data), el uso de algoritmos para procesarlos y la interconexión masiva de sistemas y dispositivos digitales.
+        </p>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <h1 class="lead">Sé parte de Nuevo León 4.0</h1>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-6 col-sm-12 col-md-6 text-right">
+      <button class="btn btn-primary btn-w" (click)="routeTo('registro')">REGÍSTRATE</button>
+    </div>
+    <div class="col-lg-6 col-sm-12 col-md-6">
+      <button  class="btn btn-info btn-w"  data-toggle="modal" data-target="#exampleModal">INICIA SESIÓN</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Login -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Iniciar sesión</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-login></app-login>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

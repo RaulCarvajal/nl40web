@@ -1,0 +1,25 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Usuario" formControlName="usr" (focus)="clear()">
+    </mat-form-field>
+    <div *ngIf="loginForm.get('usr').errors&&loginForm.get('usr').dirty">
+      <p *ngIf="loginForm.get('usr').hasError('required')" class="text-danger">El nombre de usuario es requerido</p>
+    </div>
+
+    <mat-form-field>
+      <input matInput type="password" placeholder="Contraseña" formControlName="psw" (focus)="clear()">
+    </mat-form-field>
+    <div *ngIf="loginForm.get('psw').errors&&loginForm.get('psw').dirty">
+      <p *ngIf="loginForm.get('psw').hasError('required')" class="text-danger">La contraseña es requerida</p>
+    </div>
+    <div *ngIf="faillog"><h6 class="text-warning">Datos incorrectos.</h6></div>
+  </div>
+  <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid">Iniciar sesíon</button>
+  <button type="button" id="close-modal" class="btn btn-secondary" data-dismiss="modal" style="display: none">Cerrar</button>
+</form>
+<div class="row">
+  <div class="offset-md-4 col-md-4">
+    <mat-spinner *ngIf="log"></mat-spinner>
+  </div>
+</div>

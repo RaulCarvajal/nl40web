@@ -1,0 +1,58 @@
+<app-navbar></app-navbar>
+<hr>
+<hr>
+
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="lead">Progreso de registro.</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+        <p><ngb-progressbar showValue="true" type="success" [value]="progressNum" [striped]="true" [animated]="progressNum!=100"></ngb-progressbar></p>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-12">
+      <ul class="list-group">
+        <li class="list-group-item w-100">
+          Registro de Usuario y Contacto 
+          <mat-icon class="text-success">done</mat-icon>
+        </li>
+        <li class="list-group-item w-100">
+          Registro de datos principales de la empresa 
+          <mat-icon class="text-success" *ngIf="regstat>2">done</mat-icon>
+        </li>
+        <li class="list-group-item w-100">
+          Registro de direcciones de la empresa 
+          <mat-icon class="text-success" *ngIf="regstat>3">done</mat-icon>
+        </li>
+        <li class="list-group-item w-100">
+          Registro de estatificación de la empresa según la secretaria de economia 
+          <mat-icon class="text-success" *ngIf="regstat>4">done</mat-icon>
+        </li>
+        <li class="list-group-item w-100">
+          Registro de productos 
+          <mat-icon class="text-success" *ngIf="regstat>5">done</mat-icon>
+        </li>
+      </ul>
+      <hr>
+      <h1 class="lead" *ngIf="regstat!=6">Continúa tu registro en la sección inferior</h1>
+    </div>
+  </div>
+</div>
+<br><br>
+  <app-form-empresa *ngIf="regstat==2"></app-form-empresa>
+  <app-form-direcciones *ngIf="regstat==3"></app-form-direcciones>
+  <app-form-estatificacion *ngIf="regstat==4"></app-form-estatificacion>
+  <app-form-productos *ngIf="regstat==5"></app-form-productos>
+  <div class="row" *ngIf="regstat==6">
+    <div class="col-12">
+      Tu registro ha sido completado, descarga tu acuse aqui.
+    </div>
+  </div>
+<br><br>
+<br>
+<br>

@@ -1,0 +1,103 @@
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100">
+  <div class="row" *ngIf="registrando">
+    <div class="col-12">
+      <h1 class="display-4">Datos de sesión y contacto</h1>
+    </div>        
+  </div>
+  <div class="row" *ngIf="registrando">
+    <div class="col-12">
+      <h1 class="lead">Al registrarte quedarás a cargo de una empresa. Si ya haces parte de una empresa, entonces pide a la persona que registró tu organización que te registre como colaborador.</h1>
+    </div>        
+  </div>
+  <div class="row" *ngIf="registrando">
+    <div class="col-12">
+      <form [formGroup]="newUserForm" (ngSubmit)="registrar()">
+        <div class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="Usuario" formControlName="nombre_usuario">
+          </mat-form-field>
+          <div *ngIf="newUserForm.get('nombre_usuario').errors&&newUserForm.get('nombre_usuario').dirty">
+            <p *ngIf="newUserForm.get('nombre_usuario').hasError('required')" class="text-danger">El nombre de usuario es requerido</p>
+          </div>
+
+          <mat-form-field>
+            <input matInput type="password" placeholder="Contraseña" formControlName="contraseña">
+          </mat-form-field>
+          <div *ngIf="newUserForm.get('contraseña').errors&&newUserForm.get('contraseña').dirty">
+            <p *ngIf="newUserForm.get('contraseña').hasError('required')" class="text-danger">La contraseña es requerida</p>
+          </div>
+
+          <mat-form-field>
+            <input matInput type="password" placeholder="Confirmar Contraseña" [(ngModel)]="pss" [ngModelOptions]="{standalone: true}" (keyup)="samePassword()">
+          </mat-form-field>
+          <p *ngIf="!sp" class="text-danger">Las contraseñas no coinciden</p>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Nombre(s)" formControlName="nombres">
+            </mat-form-field>
+            <div *ngIf="newUserForm.get('nombres').errors&&newUserForm.get('nombres').dirty">
+              <p *ngIf="newUserForm.get('nombres').hasError('required')" class="text-danger">El o los nombres son requeridos</p>
+            </div>
+
+          </div>
+          <div class="col">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Apellido(s)" formControlName="apellidos">
+            </mat-form-field>
+            <div *ngIf="newUserForm.get('apellidos').errors&&newUserForm.get('apellidos').dirty">
+              <p *ngIf="newUserForm.get('apellidos').hasError('required')" class="text-danger">El o los apellidos son requeridos</p>
+            </div>
+
+          </div>
+        </div>
+        <mat-form-field class="w-100">
+          <mat-label>Puesto</mat-label>
+          <mat-select formControlName="fk_id_puesto">
+            <mat-option *ngFor="let puesto of puestos" [value]="puesto.id_puesto">
+              {{puesto.nombre_puesto}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngIf="newUserForm.get('fk_id_puesto').errors&&newUserForm.get('fk_id_puesto').dirty">
+          <p *ngIf="newUserForm.get('fk_id_puesto').hasError('required')" class="text-danger">El puesto es requerido</p>
+        </div>
+
+        <div class="example-container">
+          <mat-form-field>
+            <input type="number" matInput placeholder="Télefono" formControlName="telefono">
+          </mat-form-field>
+          <div *ngIf="newUserForm.get('telefono').errors&&newUserForm.get('telefono').dirty">
+            <p *ngIf="newUserForm.get('telefono').hasError('required')" class="text-danger">El télefono es requerido</p>
+            <p *ngIf="newUserForm.get('telefono').hasError('pattern')" class="text-danger">Digite un télefono válido</p>
+          </div>
+
+          <mat-form-field>
+            <input type="email" matInput placeholder="Correo de contacto" formControlName="email">
+          </mat-form-field>
+          <div *ngIf="newUserForm.get('email').errors&&newUserForm.get('email').dirty">
+            <p *ngIf="newUserForm.get('email').hasError('required')" class="text-danger">El correo es requerido</p>
+            <p *ngIf="newUserForm.get('email').hasError('pattern')" class="text-danger">Digite un correo válido</p>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="offset-lg-6 col-lg-6 col-md-12 col-sm-12 text-right">
+            <button type="submit" class="btn btn-primary m-auto" [disabled]="newUserForm.invalid&&sp">Registrarme</button>
+          </div>
+        </div>
+      </form>
+      <small class="text-danger"><strong>TODOS LOS CAMPOS SON REQUERIDOS</strong></small>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!registrando">
+    <div class="offset-lg-5 offset-md-5 offset-sm-2 col-lg-2 col-md-2 col-sm-1">
+      <div class="text-center">
+          <mat-spinner></mat-spinner>
+      </div>
+    </div>
+  </div>
+</div>

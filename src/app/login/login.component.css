@@ -1,0 +1,18 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+  
+.example-container > * {
+    width: 100%;
+}
+
+.contenedor {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center; /* requerido para alineación horizontal */
+}
+.contenido {
+    display: inline-block;
+    text-align: left; /* requerido para volver a alinear texto izquierda */
+}
