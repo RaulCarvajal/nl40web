@@ -33,6 +33,9 @@ import { EmpresaService } from './services/empresa.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DireccionesService } from './services/direcciones.service';
 import { EstatService } from './services/estat.service';
+import { ProductosService } from './services/productos.service';
+import { MiempresaComponent } from './miempresa/miempresa.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,8 @@ import { EstatService } from './services/estat.service';
     FormEstatificacionComponent,
     FormProductosComponent,
     NavbarComponent,
-    ConstruccionComponent
+    ConstruccionComponent,
+    MiempresaComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,8 @@ import { EstatService } from './services/estat.service';
     MatIconModule,
     NgbProgressbarModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    TabsModule.forRoot()
   ],
   providers: [
     MatDatepickerModule,
@@ -72,7 +77,8 @@ import { EstatService } from './services/estat.service';
     SessionService,
     EmpresaService,
     DireccionesService,
-    EstatService
+    EstatService,
+    ProductosService
   ],
   bootstrap: [AppComponent]
 })

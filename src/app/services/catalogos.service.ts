@@ -67,5 +67,20 @@ export class CatalogosService {
   getTipoSede(){
     return this.http.get<any[]>(`http://${uri_port.url}:${uri_port.port}/api/cats/tipo_sede`,this.httpOptions)
   }
+
+  getTipoProd(){
+    return this.http.get<any[]>(`http://${uri_port.url}:${uri_port.port}/api/cats/tipo_producto`,this.httpOptions)
+  }
+
+  getTecnologias(){
+    return this.http.get<any[]>(`http://${uri_port.url}:${uri_port.port}/api/cats/tecnologias`,this.httpOptions)
+  }
   
+  getNivelPS(){
+    return this.http.get<any[]>(`http://${uri_port.url}:${uri_port.port}/api/cats/nivel_partnership`,this.httpOptions)
+  }
+
+  getPosicionamiento(){
+    return this.http.get<any[]>(`http://${uri_port.url}:${uri_port.port}/api/cats/posicionamiento`,this.httpOptions)
+  }
 }

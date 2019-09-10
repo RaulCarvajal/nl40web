@@ -97,12 +97,14 @@ export class FormEmpresaComponent implements OnInit {
 
   saveEmpresa(){
     this.saving = true;
+    console.log(this.empresaForm.value);
     this.empresa.add(this.empresaForm.value).subscribe(
       res => {
         this.session.updateSession();
         this.router.navigateByUrl('landing');
         localStorage.setItem('idempresa' , res.id);
         this.saving = false;
+        console.log(res);
       },
       err => {
         this.error=true;
@@ -110,4 +112,5 @@ export class FormEmpresaComponent implements OnInit {
       }
     );
   }
+
 }

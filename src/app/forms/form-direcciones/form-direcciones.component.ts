@@ -87,7 +87,7 @@ export class FormDireccionesComponent implements OnInit {
     control.push(this.fb.group({
       direccion : ['',[Validators.required]],
       tipo_sede : ['',[Validators.required]],
-      pais : ['',[Validators.required]],
+      pais : ['México',[Validators.required]],
       estado : ['',[Validators.required]],
       municipio : ['',[Validators.required]],
     }));
@@ -102,10 +102,11 @@ export class FormDireccionesComponent implements OnInit {
     this.saving = true;
     this.direccionesService.save(this.dirForm.value).subscribe(
       res => {
+        this.router.navigateByUrl('landing');
         console.log(res);
         this.session.updateSession();
-        this.router.navigateByUrl('landing');
         this.saving = false;
+        location.reload();
       },
       err => {
         this.error=true;
