@@ -106,7 +106,6 @@ export class FormDireccionesComponent implements OnInit {
         console.log(res);
         this.session.updateSession();
         this.saving = false;
-        location.reload();
       },
       err => {
         this.error=true;

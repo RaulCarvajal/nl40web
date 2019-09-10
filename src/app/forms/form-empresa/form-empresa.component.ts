@@ -101,7 +101,8 @@ export class FormEmpresaComponent implements OnInit {
     this.empresa.add(this.empresaForm.value).subscribe(
       res => {
         this.session.updateSession();
-        this.router.navigateByUrl('landing');
+        //this.router.navigateByUrl('landing');
+        location.reload();
         localStorage.setItem('idempresa' , res.id);
         this.saving = false;
         console.log(res);

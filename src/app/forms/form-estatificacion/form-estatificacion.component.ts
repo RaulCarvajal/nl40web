@@ -108,6 +108,7 @@ export class FormEstatificacionComponent implements OnInit {
 
   save(){
     this.saving = true;
+    console.log(this.formEstat.value);
     this.estat.add(this.formEstat.value).subscribe(
       res => {
         console.log(res);
