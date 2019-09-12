@@ -14,26 +14,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./form-direcciones.component.css']
 })
 export class FormDireccionesComponent implements OnInit {
-
+ 
   constructor(
     private fb: FormBuilder,
     private catalogos: CatalogosService,
     private session: SessionService,
     private direccionesService: DireccionesService,
-    private router: Router) { }
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.dirForm = this.fb.group({
-      direcciones : this.fb.array([this.fb.group({
-        direccion : ['',[Validators.required]],
-        tipo_sede : ['',[Validators.required]],
-        pais : ['México',[Validators.required]],
-        estado : ['',[Validators.required]],
-        municipio : ['',[Validators.required]],
-      })]),
-      empresa_id : this.session.getEmpresaId(),
-      contacto_id : this.session.getContactoId()
+      direccion : ['',[Validators.required]],
+      tipo_sede : ['',[Validators.required]],
+      pais : ['México',[Validators.required]],
+      estado : ['',[Validators.required]],
+      municipio : ['',[Validators.required]],
     });
+      /*
+      empresa_id : this.session.getEmpresaId(),
+      contacto_id : this.session.getContactoId()*/
     this.getTipoSede();
     this.getEstados();
   }
@@ -47,6 +47,8 @@ export class FormDireccionesComponent implements OnInit {
   municipios: municipio[];
   saving:boolean=false;
   error:boolean=false;
+  ocultar: boolean = false;
+  guardado: boolean = false;
 
   get getDirecciones(){ 
     return this.dirForm.get('direcciones') as FormArray;
@@ -82,36 +84,36 @@ export class FormDireccionesComponent implements OnInit {
     );
   } */
 
-  addDir(){
-    const control = <FormArray> this.dirForm.controls['direcciones']
-    control.push(this.fb.group({
-      direccion : ['',[Validators.required]],
-      tipo_sede : ['',[Validators.required]],
-      pais : ['México',[Validators.required]],
-      estado : ['',[Validators.required]],
-      municipio : ['',[Validators.required]],
-    }));
-  }
-
-  remDirForm(index:number){
-    const control = <FormArray> this.dirForm.controls['direcciones']
-    control.removeAt(index);
-  }
-
   saveDirs(){
+    let temp = this.dirForm.value;
+    temp.empresa_id = this.session.getEmpresaId(),
+    temp.contacto_id = this.session.getContactoId()
     this.saving = true;
+    console.log(temp);
     this.direccionesService.save(this.dirForm.value).subscribe(
       res => {
-        this.router.navigateByUrl('landing');
         console.log(res);
         this.session.updateSession();
         this.saving = false;
+        this.dirForm.disable();
+        this.guardado = true;
       },
       err => {
         this.error=true;
         console.error(err);
       }
     );
+  }
+
+  finalizar(){
+    this.router.navigateByUrl('landing');
+  }
+
+  addOtro(){
+    document.getElementById('reset').click();
+    this.dirForm.enable();
+    this.ocultar = false;
+    this.guardado = false;
   }
 
 }

@@ -16,7 +16,7 @@
         <li class="list-group-item"><strong>Razón social: </strong>{{empresa.razon_social}}</li>
         <li class="list-group-item"><strong>RFC: </strong>{{empresa.rfc}}</li>
         <li class="list-group-item">
-          <strong>Ubicación de las oficinas:</strong>
+          <strong>Ubicación de las oficinas:</strong><a  class="btn ml-auto" role="button" data-toggle="modal" data-target="#modalAddDir"><mat-icon>add_circle_outline</mat-icon></a>
           <div>
             <tabset>
               <tab *ngFor="let dir of direcciones; let pointIndex=index" heading="{{pointIndex+1}} - {{dir.tipo_sede}}" id="tab1">
@@ -72,19 +72,38 @@
             <ul>
               <li>
                 <em>Nacional (México)</em>
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-horizontal-sm">
                   <li class="list-group-item" *ngFor="let estado of estados">{{estado}}</li>
                 </ul>
               </li>
               <li>
                 <em>Internacional</em>
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-horizontal-sm">
                   <li class="list-group-item" *ngFor="let pais of paises">{{pais}}</li>
                 </ul>
               </li>
             </ul>
         </li>
       </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Login -->
+<div class="modal fade bd-example-modal-lg" id="modalAddDir" tabindex="-1" role="dialog" aria-labelledby="modalAddDirLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAddDirLabel">Agregar dirección</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-form-direcciones></app-form-direcciones>
+      </div>
+      <div class="modal-footer">
+      </div>
     </div>
   </div>
 </div>

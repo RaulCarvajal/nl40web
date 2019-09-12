@@ -5,73 +5,58 @@
     </div>
   </div>
   <form [formGroup]="dirForm" (ngSubmit)="saveDirs()">
-    <div formArrayName="direcciones">
-      <div *ngFor="let item of getDirecciones.controls; let pointIndex=index" [formGroupName]="pointIndex">
-        <div *ngIf="pointIndex>0" class="row">
-          <div class="col text-right">
-            <button class="btn btn-ligth" type="button" (click)="remDirForm(pointIndex)">
-              <mat-icon>clear</mat-icon>
-            </button>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 col-md-9 col-lg-8">
-            <mat-form-field class="w-100">
-              <input matInput placeholder="Dirección" formControlName="direccion">
-            </mat-form-field>
-          </div>
-          <div class="col-sm-12 col-md-3 col-lg-4">
-            <mat-form-field class="w-100">
-              <mat-label>Tipo de sede</mat-label>
-              <mat-select formControlName="tipo_sede">
-                <mat-option *ngFor="let ts of tipo_sede" [value]="ts.id_cat_sede">{{ts.tipo_sede}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 col-md-4 col-lg-4">
-            <mat-form-field class="w-100">
-              <mat-label>País</mat-label>
-              <mat-select formControlName="pais">
-                <mat-option *ngFor="let pais of paises" [value]="pais.nombre">{{pais.nombre}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-4">
-            <mat-form-field class="w-100">
-              <mat-label>Estado / Provincia / Departamento</mat-label>
-              <mat-select formControlName="estado">
-                <mat-option *ngFor="let estado of estados" [value]="estado.nombre_estado">{{estado.nombre_estado}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-4">
-            <mat-form-field class="w-100">
-              <input matInput placeholder="Municipio" formControlName="municipio">
-              <!--<mat-label>Municipio</mat-label>
-              <mat-select formControlName="municipio">
-                <mat-option *ngFor="let sector of sectores" [value]="sector.sec">{{sector.sec}}</mat-option>
-              </mat-select>-->
-            </mat-form-field>
-          </div>
-        </div>
-        <hr>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-9 col-lg-8">
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Dirección" formControlName="direccion">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-3 col-lg-4">
+        <mat-form-field class="w-100">
+          <mat-label>Tipo de sede</mat-label>
+          <mat-select formControlName="tipo_sede">
+            <mat-option *ngFor="let ts of tipo_sede" [value]="ts.id_cat_sede">{{ts.tipo_sede}}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
     <div class="row">
-      <div class="col text-left">
-        <button class="btn btn-ligth" type="button" (click)="addDir()">
-          <mat-icon>add</mat-icon>
-        </button>
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        <mat-form-field class="w-100">
+          <mat-label>País</mat-label>
+          <mat-select formControlName="pais">
+            <mat-option *ngFor="let pais of paises" [value]="pais.nombre">{{pais.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        <mat-form-field class="w-100">
+          <mat-label>Estado / Provincia / Departamento</mat-label>
+          <mat-select formControlName="estado">
+            <mat-option *ngFor="let estado of estados" [value]="estado.nombre_estado">{{estado.nombre_estado}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Municipio" formControlName="municipio">
+          <!--<mat-label>Municipio</mat-label>
+          <mat-select formControlName="municipio">
+            <mat-option *ngFor="let sector of sectores" [value]="sector.sec">{{sector.sec}}</mat-option>
+          </mat-select>-->
+        </mat-form-field>
       </div>
     </div>
+    <hr>
+
     <div class="row">
       <div class="col-12 text-right">
-        <button type="reset" class="btn btn-danger" style="width: 100px;">Limpiar</button>
+        <button type="reset" id="reset" class="btn btn-danger" style="width: 100px;">Limpiar</button>
         <button type="submit" class="btn btn-success" style="margin-left: 10px; width: 100px;" [disabled]="dirForm.invalid">Guardar</button>
       </div>
     </div>
+
     <div class="row">
       <div class="col-12 text-left">
         <small class="text-danger"><strong>* TODOS LOS CAMPOS SON REQUERIDOS <br> **POR EL MOMENTO SOLO DISPONIBLE MÉXICO</strong></small>
@@ -84,4 +69,18 @@
       </div>
     </div>
   </form>
+
+  <div class="row" *ngIf="guardado">
+    <div class="col">
+      <p class="lead text-center">Dirección guardada.</p>
+    </div>
+  </div>
+  <div class="row" *ngIf="guardado">
+    <div class="offset-lg-4 offset-md-4 offset-sm-2 col-lg-2 col-md-2 col-sm-2">
+      <button type="button" class="btn btn-primary w-100" (click)="addOtro()">Registrar otro</button>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2">
+      <button type="button" class="btn btn-success w-100" (click)="finalizar()">Finalizar</button>
+    </div>
+  </div>
 </div>
