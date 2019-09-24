@@ -2,10 +2,10 @@
 <hr>
 <hr>
 
-<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto">
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="!cargando">
   <div class="row">
     <div class="col">
-      <h1 class="display-4">Información de mi empresa</h1>
+      <h1 class="display-4"><a role="button" class="btn btn-outline-primary" (click)="return()"><mat-icon>keyboard_arrow_left</mat-icon></a> Información de mi empresa</h1>
     </div>
   </div>
   <hr>
@@ -16,10 +16,10 @@
         <li class="list-group-item"><strong>Razón social: </strong>{{empresa.razon_social}}</li>
         <li class="list-group-item"><strong>RFC: </strong>{{empresa.rfc}}</li>
         <li class="list-group-item">
-          <strong>Ubicación de las oficinas:</strong><a  class="btn ml-auto" role="button" data-toggle="modal" data-target="#modalAddDir"><mat-icon>add_circle_outline</mat-icon></a>
+          <strong>Ubicación de las oficinas:</strong>
           <div>
             <tabset>
-              <tab *ngFor="let dir of direcciones; let pointIndex=index" heading="{{pointIndex+1}} - {{dir.tipo_sede}}" id="tab1">
+              <tab *ngFor="let dir of direcciones; let pointIndex=index" heading="{{pointIndex+1}} - {{dir.tipo_sede}}">
                 <ul>
                   <li><em>Dirección: </em>{{dir.direccion}}</li>
                   <li><em>Pais: </em>{{dir.pais}}</li>
@@ -29,6 +29,13 @@
               </tab>
             </tabset>
           </div>
+          <ngb-accordion>
+            <ngb-panel title="Agregar nueva direccíon">
+              <ng-template ngbPanelContent class="fade">
+                <app-form-direcciones></app-form-direcciones>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
         </li>
         <li class="list-group-item"><strong>Sitio web: </strong><a href="{{empresa.web}}">{{empresa.web}}</a></li>
         <li class="list-group-item">
@@ -76,6 +83,7 @@
                   <li class="list-group-item" *ngFor="let estado of estados">{{estado}}</li>
                 </ul>
               </li>
+              <br>
               <li>
                 <em>Internacional</em>
                 <ul class="list-group list-group-horizontal-sm">
@@ -84,26 +92,174 @@
               </li>
             </ul>
         </li>
+        <li class="list-group-item">
+          <strong>Estatificación de empresa según secretaría de economía</strong>
+          <ul>
+            <li>
+              <strong>Tamaño de la empresa(Personas): </strong>
+              <br>{{estat.tamano_empresa}}
+            </li>
+            <br>
+            <li>
+              <strong>Nivel de ventas anuales: </strong>
+              <br>{{estat.nivel_ventas}}
+            </li>
+            <br>
+            <li>
+              <strong>Detalle de ventas empreses sector servicios y productos TI:</strong>
+              <br>{{estat.detalle_ventas}}
+            </li>
+            <br>
+            <li>
+              <strong>Software que utilizan actualmente para sus procesos en su organizació</strong>
+              <ul class="list-group list-group-horizontal-sm">
+                <li class="list-group-item" *ngFor="let sw of software">
+                  {{sw}}
+                </li>
+              </ul>
+            </li>
+            <br>
+            <li>
+              <strong>Certificaciones principales con las que cuenta su organización</strong>
+              <ul class="list-group list-group-horizontal-sm">
+                <li class="list-group-item" *ngFor="let ce of certs">
+                  {{ce}}
+                </li>
+              </ul>
+            </li>
+            <br>
+            <li><strong>Sector al que pertenece:</strong>
+              <br>{{estat.sector}}
+            </li>
+            <br>
+            <li><strong>Tipo de empresa:</strong>
+              <br>{{estat.tipo_empresa}}
+            </li>
+          </ul>
+        </li>
+        <li class="list-group-item">
+          <strong>Productos de mi empresa:</strong>
+          <ul>
+            <li>
+              <strong>Propios</strong>
+            </li>
+            <div class="w-100" *ngIf="!nullpp">
+              <p class="mx-auto"><strong>SIN PRODUCTOS REGISTRADOS.</strong></p>
+            </div>
+            <div *ngIf="nullpp">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Áreas/Tecnologias</th>
+                    <th scope="col">Posicionamiento</th>
+                    <th scope="col">Ver</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pp of p_propios; let inx = index;">
+                    <th scope="row">{{inx+1}}</th>
+                    <td>{{pp.nombre}}</td>
+                    <td>{{tabString(pp.descripcion)}}</td>
+                    <td>{{pp.tecnologias}}</td>
+                    <td>{{pp.posicionamiento}}</td>
+                    <td>
+                      <a role="button" routerLink="/producto/{{pp.id_producto}}" class="btn btn-outline-success">
+                        <mat-icon>visibility</mat-icon>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <br>
+            <li>
+              <strong>Tercero</strong>
+            </li>
+            <div class="w-100" *ngIf="!nullpt">
+              <p class="mx-auto"><strong>SIN PRODUCTOS REGISTRADOS.</strong></p>
+            </div>
+            <div *ngIf="nullpt">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Áreas/Tecnologias</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Nivel de partnership</th>
+                    <th scope="col">Ver</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pt of p_tercero; let inx = index;">
+                    <th scope="row">{{inx+1}}</th>
+                    <td>{{pt.nombre}}</td>
+                    <td>{{tabString(pt.descripcion)}}</td>
+                    <td>{{pt.tecnologias}}</td>
+                    <td>{{pt.marca}}</td>
+                    <td>{{pt.partnership}}</td>
+                    <td>
+                      <a role="button" routerLink="/producto/{{pt.id_producto}}" class="btn btn-outline-success">
+                        <mat-icon>visibility</mat-icon>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ul>
+        </li>
+        <li class="list-group-item">
+          <ul>
+            <li>
+              <strong>Oferta valor de la organización</strong><br>
+              <p class="text-justify">
+                {{info_gnrl.descripcion_oferta_valor}}
+              </p>
+            </li>
+            <br>
+            <li>
+              <strong>Sectores atendidos por la organización</strong><small>(Finanzas, Comercio, Industria, Servicios, Gobierno)</small>
+              <br>
+              <ul class="list-group list-group-horizontal-sm">
+                <li class="list-group-item" *ngFor="let sec of sectores_a">{{sec}}</li>
+              </ul>
+            </li>
+            <br>
+            <li>
+              <strong>5 Principales clientes</strong><br>
+              {{info_gnrl.principales_clientes}}
+            </li>
+            <br>
+            <li>
+              <strong>Organizaciones empresariales en las que participa</strong><br>
+              <ul class="list-group list-group-horizontal-sm">
+                <li class="list-group-item" *ngFor="let org of organizaciones">{{org}}</li>
+              </ul>
+            </li>
+            <br>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
 </div>
-
-<!-- Modal Login -->
-<div class="modal fade bd-example-modal-lg" id="modalAddDir" tabindex="-1" role="dialog" aria-labelledby="modalAddDirLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalAddDirLabel">Agregar dirección</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <app-form-direcciones></app-form-direcciones>
-      </div>
-      <div class="modal-footer">
-      </div>
+<br><br>
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="cargando">
+  <div class="row">
+    <div class="col">
+        <h1 class="lead">
+          Cargando datos . . .
+        </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <mat-spinner class="mx-auto"></mat-spinner>
     </div>
   </div>
 </div>

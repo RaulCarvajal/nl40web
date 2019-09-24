@@ -87,4 +87,16 @@
         </form>
       </div>
     </div>
+
+    <div class="row" *ngIf="guardado">
+      <div class="col">
+        <p class="lead text-center">Información guardada.</p>
+      </div>
+    </div>
+    <div class="row" *ngIf="guardado">
+      <div class="mx-auto">
+        <button class="btn btn-success" (click)="finalizar()">Siguiente</button>
+      </div>
+    </div>
+
   </div>

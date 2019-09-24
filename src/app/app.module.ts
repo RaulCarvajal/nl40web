@@ -20,12 +20,9 @@ import { FormEmpresaComponent } from './forms/form-empresa/form-empresa.componen
 import { FormDireccionesComponent } from './forms/form-direcciones/form-direcciones.component';
 import { FormEstatificacionComponent } from './forms/form-estatificacion/form-estatificacion.component';
 import { FormProductosComponent } from './forms/form-productos/form-productos.component';
-import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConstruccionComponent } from './construccion/construccion.component';
-
-
-//Providers
 import { CatalogosService } from './services/catalogos.service';
 import { ContactoService } from './services/contacto.service';
 import { SessionService } from './services/session.service';
@@ -36,6 +33,11 @@ import { EstatService } from './services/estat.service';
 import { ProductosService } from './services/productos.service';
 import { MiempresaComponent } from './miempresa/miempresa.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatTableModule } from '@angular/material/table';
+import { ProductoComponent } from './producto/producto.component';
+import { CorreosService } from './services/correos.service';
+
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     FormProductosComponent,
     NavbarComponent,
     ConstruccionComponent,
-    MiempresaComponent
+    MiempresaComponent,
+    ProductoComponent
   ],
   imports: [
     BrowserModule,
@@ -65,10 +68,12 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
-    NgbProgressbarModule,
+    //NgbProgressbarModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    NgbModule,
+    MatTableModule
   ],
   providers: [
     MatDatepickerModule,
@@ -78,7 +83,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     EmpresaService,
     DireccionesService,
     EstatService,
-    ProductosService
+    ProductosService,
+    CorreosService
   ],
   bootstrap: [AppComponent]
 })

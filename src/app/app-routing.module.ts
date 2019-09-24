@@ -6,8 +6,10 @@ import { LandingComponent } from './landing/landing.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { MiempresaComponent } from './miempresa/miempresa.component';
 import { ConstruccionComponent } from './construccion/construccion.component';
+import { ProductoComponent } from './producto/producto.component';
 
 const routes: Routes = [
+  {path : 'producto/:id', component : ProductoComponent},
   {path : 'registro', component : RegistroComponent},
   {path : 'landing', component : LandingComponent},
   {path : 'inicio', component : InicioComponent},

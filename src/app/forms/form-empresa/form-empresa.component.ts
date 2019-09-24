@@ -25,21 +25,21 @@ export class FormEmpresaComponent implements OnInit {
 
   ngOnInit() {
     this.empresaForm =  this.fb.group({
-      nombre : ['',[Validators.required]],
-      razon_social : ['',[Validators.required]],
+      nombre : ['',[Validators.required,Validators.maxLength(150)]],
+      razon_social : ['',[Validators.required,Validators.maxLength(150)]],
       rfc : ['',[Validators.required,Validators.minLength(12),Validators.maxLength(13)]],
       fecha_creación : ['',[Validators.required]],
-      web : ['',[Validators.pattern(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/)]],
-      linkedin : ['',[]],
-      facebook : ['',[]],
-      twitter : ['',[]],
-      instagram : ['',[]],
-      descripcion_oferta_valor : ['',[Validators.required]],
+      web : ['',[Validators.pattern(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/),Validators.maxLength(200)]],
+      linkedin : ['',[Validators.maxLength(100), Validators.pattern(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/)]],
+      facebook : ['',[Validators.maxLength(100), Validators.pattern(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/)]],
+      twitter : ['',[Validators.maxLength(100), Validators.pattern(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/)]],
+      instagram : ['',[Validators.maxLength(100), Validators.pattern(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/)]],
+      descripcion_oferta_valor : ['',[Validators.required,Validators.maxLength(500)]],
       sectores_atendidos : ['',[Validators.required]],
       clientes_sectores : ['',[Validators.required]],
       orgs_afiliado : ['',[]],
-      c_nacional : ['',[]],
-      c_internacional : ['',[]],
+      c_nacional : ['',[Validators.required]],
+      c_internacional : ['',[Validators.required]],
       fk_id_contacto : [this.session.getContactoId()]
     });
 
@@ -56,6 +56,8 @@ export class FormEmpresaComponent implements OnInit {
   paises:pais[];
   saving:boolean=false;
   error:boolean=false;
+  guardado: boolean = false;
+
 
   getSectoresA(){
     this.catalogosService.getSectoresAntendidos().subscribe(
@@ -101,17 +103,20 @@ export class FormEmpresaComponent implements OnInit {
     this.empresa.add(this.empresaForm.value).subscribe(
       res => {
         this.session.updateSession();
-        //this.router.navigateByUrl('landing');
-        location.reload();
         localStorage.setItem('idempresa' , res.id);
         this.saving = false;
-        console.log(res);
+        this.empresaForm.disable();
+        this.guardado = true;
       },
       err => {
         this.error=true;
         console.error(err);
       }
     );
+  }
+
+  finalizar(){
+    this.router.navigateByUrl('landing');
   }
 
 }

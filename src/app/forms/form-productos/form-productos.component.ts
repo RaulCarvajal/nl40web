@@ -26,6 +26,8 @@ export class FormProductosComponent implements OnInit {
   tecnologias:any[];
   niveles:any[];
   poss:any[];
+  vd:any[];
+  il:any[];
 
   saving:boolean=false;
   error:boolean=false;
@@ -36,13 +38,17 @@ export class FormProductosComponent implements OnInit {
 
   ngOnInit() {
     this.formProducto = this.fb.group({
-      nombre_producto : [null,[Validators.required]],
+      nombre_producto : [null,[Validators.required, Validators.maxLength(100)]],
       tipo : [null,[Validators.required]],
-      descripcion_producto : [null,[Validators.required]],
+      descripcion_producto : [null,[Validators.required, Validators.maxLength(500)]],
       tecnologias : [null,[Validators.required]],
-      marca : [null,[]],
+      marca : [null,[Validators.maxLength(100)]],
       nivel_partnership : [null,[]],
-      posicionamiento : [null,[]]
+      posicionamiento : [null,[]],
+      value_driver : [null,[Validators.required]],
+      industry_lever : [null,[Validators.required]],
+      caso_exito : [null,[Validators.required]],
+      referencia : [null,[Validators.required]]
     });
 
     this.getCats();
@@ -84,6 +90,15 @@ export class FormProductosComponent implements OnInit {
         console.error(err);
       }
     );
+
+    this.cats.getValueDrivers().subscribe(
+      res => {
+        this.vd = res;
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   tipoProd(){
@@ -97,15 +112,24 @@ export class FormProductosComponent implements OnInit {
     }
   }
 
+  getIL(){
+    this.cats.getIndustryLevers(this.formProducto.value.value_driver).subscribe(
+      res => {
+        this.il = res;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
   save(){
     let temp = this.formProducto.value;
     temp.empresa_id = this.session.getEmpresaId(),
     temp.contacto_id = this.session.getContactoId()
-    console.log(temp);
     this.saving = true;
     this.prods.add(temp).subscribe(
       res => {
-        console.log(res);
         this.session.updateSession();
         this.saving = false;
         this.formProducto.disable();
@@ -130,5 +154,4 @@ export class FormProductosComponent implements OnInit {
     this.tercero = false;
     this.guardado = false;
   }
-
 }

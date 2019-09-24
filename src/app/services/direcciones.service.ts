@@ -19,4 +19,8 @@ export class DireccionesService {
     get(id: number){
       return this.http.get<direccion_get[]>(`http://${uri_port.url}:${uri_port.port}/api/direcciones/${id}`);
     }
+
+    existeDirFiscal(id:number){
+      return this.http.get<boolean>(`http://${uri_port.url}:${uri_port.port}/api/existeDirFiscal/${id}`);
+    }
 }

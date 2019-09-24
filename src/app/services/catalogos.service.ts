@@ -49,7 +49,7 @@ export class CatalogosService {
   }
 
   getMunicipiosMex(id:number){
-    return this.http.get<any[]>(`http://${uri_port.url}:${uri_port.port}/api/cats/municipios?id=${id}`,this.httpOptions)
+    return this.http.get<any[]>(`http://${uri_port.url}:${uri_port.port}/api/cats/municipios/${id}`,this.httpOptions)
   }
 
   getPaises(){
@@ -82,5 +82,13 @@ export class CatalogosService {
 
   getPosicionamiento(){
     return this.http.get<any[]>(`http://${uri_port.url}:${uri_port.port}/api/cats/posicionamiento`,this.httpOptions)
+  }
+
+  getValueDrivers(){
+    return this.http.get<any[]>(`http://${uri_port.url}:${uri_port.port}/api/cats/value_drivers`,this.httpOptions)
+  }
+
+  getIndustryLevers(id: number){
+    return this.http.get<any[]>(`http://${uri_port.url}:${uri_port.port}/api/cats/industry_levers/${id}`,this.httpOptions)
   }
 }

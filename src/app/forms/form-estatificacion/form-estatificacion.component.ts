@@ -47,6 +47,7 @@ export class FormEstatificacionComponent implements OnInit {
   tipoEmpresa:any[];
   saving:boolean=false;
   error:boolean=false;
+  guardado: boolean = false;
 
   getCats(){
     this.cats.getTamEmp().subscribe(
@@ -108,13 +109,12 @@ export class FormEstatificacionComponent implements OnInit {
 
   save(){
     this.saving = true;
-    console.log(this.formEstat.value);
     this.estat.add(this.formEstat.value).subscribe(
       res => {
-        console.log(res);
         this.session.updateSession();
-        this.router.navigateByUrl('landing');
         this.saving = false;
+        this.formEstat.disable();
+        this.guardado = true;
       },
       err => {
         this.error=true;
@@ -122,4 +122,9 @@ export class FormEstatificacionComponent implements OnInit {
       }
     );
   }
+
+  finalizar(){
+    this.router.navigateByUrl('landing');
+  }
+
 }

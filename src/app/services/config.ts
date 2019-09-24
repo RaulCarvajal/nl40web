@@ -1,4 +1,4 @@
 export const uri_port = {
-    url : "localhost",
-    port : "57042"
+    url : "3.16.25.236",
+    port : "8080"
 }

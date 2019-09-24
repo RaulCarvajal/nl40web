@@ -12,6 +12,10 @@
             <mat-form-field class="w-100">
               <input matInput placeholder="Nombre" formControlName="nombre_producto">
             </mat-form-field>
+            <div *ngIf="formProducto.get('nombre_producto').errors&&formProducto.get('nombre_producto').dirty">
+              <p *ngIf="formProducto.get('nombre_producto').hasError('required')" class="text-danger">Este campo es requerido</p>
+              <p *ngIf="formProducto.get('nombre_producto').hasError('maxlength')" class="text-danger">Máximo 100 caracteres</p>
+            </div>
           </div>
           <div class="col-lg-4 col-md-6 col-sm-12">
             <mat-form-field class="w-100">
@@ -20,6 +24,9 @@
                 <mat-option *ngFor="let tipo of tipos" [value]="tipo.id_tipo_prod">{{tipo.tipo_producto}}</mat-option>
               </mat-select>
             </mat-form-field>
+            <div *ngIf="formProducto.get('tipo').errors&&formProducto.get('tipo').dirty">
+              <p *ngIf="formProducto.get('tipo').hasError('required')" class="text-danger">Este campo es requerido</p>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -27,6 +34,10 @@
             <mat-form-field class="w-100">
               <textarea matInput placeholder="Descripción del productos" formControlName="descripcion_producto"></textarea>                
             </mat-form-field>
+            <div *ngIf="formProducto.get('descripcion_producto').errors&&formProducto.get('descripcion_producto').dirty">
+              <p *ngIf="formProducto.get('descripcion_producto').hasError('required')" class="text-danger">Este campo es requerido</p>
+              <p *ngIf="formProducto.get('descripcion_producto').hasError('maxlength')" class="text-danger">Máximo 500 caracteres</p>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -37,6 +48,9 @@
                 <mat-option *ngFor="let tec of tecnologias" [value]="tec.id_cat_tec">{{tec.nombre_tecnologias}}</mat-option>
               </mat-select>
             </mat-form-field>
+            <div *ngIf="formProducto.get('tecnologias').errors&&formProducto.get('tecnologias').dirty">
+              <p *ngIf="formProducto.get('tecnologias').hasError('required')" class="text-danger">Este campo es requerido</p>
+            </div>
           </div>
         </div>
 
@@ -45,14 +59,22 @@
             <mat-form-field class="w-100">
               <input matInput placeholder="Marca del producto" formControlName="marca">
             </mat-form-field>
+            <div *ngIf="formProducto.get('marca').errors&&formProducto.get('marca').dirty">
+              <p *ngIf="formProducto.get('marca').hasError('required')" class="text-danger">Este campo es requerido</p>
+              <p *ngIf="formProducto.get('marca').hasError('maxlength')" class="text-danger">Máximo 100 caracteres</p>
+            </div>
           </div>
           <div class="col-lg-4 col-md-6 col-sm-12">
             <mat-form-field class="w-100">
-              <mat-label>Nivel de Partnership</mat-label>
+              <!--<mat-label>Nivel de Partnership</mat-label>
               <mat-select formControlName="nivel_partnership">
                 <mat-option *ngFor="let nvl of niveles" [value]="nvl.id_cat_part">{{nvl.nivel_partnership}}</mat-option>
-              </mat-select>
+              </mat-select>-->
+              <input matInput placeholder="Nivel de Partnership" formControlName="nivel_partnership">
             </mat-form-field>
+            <div *ngIf="formProducto.get('nivel_partnership').errors&&formProducto.get('nivel_partnership').dirty">
+              <p *ngIf="formProducto.get('nivel_partnership').hasError('required')" class="text-danger">Este campo es requerido</p>
+            </div>
           </div>
         </div>
 
@@ -64,6 +86,53 @@
                 <mat-option *ngFor="let pos of poss" [value]="pos.id_cat_pos">{{pos.posicionamiento}}</mat-option>
               </mat-select>
             </mat-form-field>
+            <div *ngIf="formProducto.get('posicionamiento').errors&&formProducto.get('posicionamiento').dirty">
+              <p *ngIf="formProducto.get('posicionamiento').hasError('required')" class="text-danger">Este campo es requerido</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <mat-form-field class="w-100">
+              <mat-label>Value Drivers</mat-label>
+              <mat-select formControlName="value_driver" (selectionChange)="getIL()">
+                <mat-option *ngFor="let v of vd" [value]="v.id_value_divers">{{v.value_driver}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="formProducto.get('value_driver').errors&&formProducto.get('value_driver').dirty">
+              <p *ngIf="formProducto.get('value_driver').hasError('required')" class="text-danger">Este campo es requerido</p>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <mat-form-field class="w-100">
+              <mat-label>Industry Levers</mat-label>
+              <mat-select formControlName="industry_lever">
+                <mat-option *ngFor="let i of il" [value]="i.id_industry_levers">{{i.industry_levers}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="formProducto.get('industry_lever').errors&&formProducto.get('industry_lever').dirty">
+              <p *ngIf="formProducto.get('industry_lever').hasError('required')" class="text-danger">Este campo es requerido</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Caso de éxito" formControlName="caso_exito">
+            </mat-form-field>
+            <div *ngIf="formProducto.get('caso_exito').errors&&formProducto.get('caso_exito').dirty">
+              <p *ngIf="formProducto.get('caso_exito').hasError('required')" class="text-danger">Este campo es requerido</p>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Referencia" formControlName="referencia">
+            </mat-form-field>
+            <div *ngIf="formProducto.get('referencia').errors&&formProducto.get('referencia').dirty">
+              <p *ngIf="formProducto.get('referencia').hasError('required')" class="text-danger">Este campo es requerido</p>
+            </div>
           </div>
         </div>
 

@@ -18,6 +18,8 @@
           </mat-form-field>
           <div *ngIf="newUserForm.get('nombre_usuario').errors&&newUserForm.get('nombre_usuario').dirty">
             <p *ngIf="newUserForm.get('nombre_usuario').hasError('required')" class="text-danger">El nombre de usuario es requerido</p>
+            <p *ngIf="newUserForm.get('nombre_usuario').hasError('minlength')" class="text-danger">Mínimo 8 caracteres</p>
+            <p *ngIf="newUserForm.get('nombre_usuario').hasError('maxlength')" class="text-danger">Máximo 30 caracteres</p>
           </div>
 
           <mat-form-field>
@@ -25,6 +27,8 @@
           </mat-form-field>
           <div *ngIf="newUserForm.get('contraseña').errors&&newUserForm.get('contraseña').dirty">
             <p *ngIf="newUserForm.get('contraseña').hasError('required')" class="text-danger">La contraseña es requerida</p>
+            <p *ngIf="newUserForm.get('contraseña').hasError('minlength')" class="text-danger">Mínimo 6 caracteres</p>
+            <p *ngIf="newUserForm.get('contraseña').hasError('maxlength')" class="text-danger">Máximo 12 caracteres</p>
           </div>
 
           <mat-form-field>
@@ -40,6 +44,7 @@
             </mat-form-field>
             <div *ngIf="newUserForm.get('nombres').errors&&newUserForm.get('nombres').dirty">
               <p *ngIf="newUserForm.get('nombres').hasError('required')" class="text-danger">El o los nombres son requeridos</p>
+              <p *ngIf="newUserForm.get('nombres').hasError('maxlength')" class="text-danger">Máximo 50 caracteres</p>            
             </div>
 
           </div>
@@ -49,6 +54,7 @@
             </mat-form-field>
             <div *ngIf="newUserForm.get('apellidos').errors&&newUserForm.get('apellidos').dirty">
               <p *ngIf="newUserForm.get('apellidos').hasError('required')" class="text-danger">El o los apellidos son requeridos</p>
+              <p *ngIf="newUserForm.get('apellidos').hasError('maxlength')" class="text-danger">Máximo 50 caracteres</p>            
             </div>
 
           </div>
@@ -72,6 +78,7 @@
           <div *ngIf="newUserForm.get('telefono').errors&&newUserForm.get('telefono').dirty">
             <p *ngIf="newUserForm.get('telefono').hasError('required')" class="text-danger">El télefono es requerido</p>
             <p *ngIf="newUserForm.get('telefono').hasError('pattern')" class="text-danger">Digite un télefono válido</p>
+            <p *ngIf="newUserForm.get('telefono').hasError('maxlength')" class="text-danger">Máximo 30 caracteres</p>            
           </div>
 
           <mat-form-field>
@@ -79,7 +86,8 @@
           </mat-form-field>
           <div *ngIf="newUserForm.get('email').errors&&newUserForm.get('email').dirty">
             <p *ngIf="newUserForm.get('email').hasError('required')" class="text-danger">El correo es requerido</p>
-            <p *ngIf="newUserForm.get('email').hasError('pattern')" class="text-danger">Digite un correo válido</p>
+            <p *ngIf="newUserForm.get('email').hasError('maxlength')" class="text-danger">Máximo 30 caracteres</p>            
+            <p *ngIf="newUserForm.get('email').hasError('email')" class="text-danger">Digite un correo válido</p>
           </div>
 
         </div>

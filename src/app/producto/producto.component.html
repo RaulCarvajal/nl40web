@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+<br><br>
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="!cargando">
+  <div class="row">
+    <div class="col">
+      <h1 class="display-4"><a role="button" class="btn btn-outline-primary" (click)="return()"><mat-icon>keyboard_arrow_left</mat-icon></a> Ver producto</h1>
+    </div>
+  </div>
+  <br>
+  <div class="row ">
+    <div class="col-12">
+      <ul class="list-group">
+        <li class="list-group-item"><strong>Nombre: </strong>{{producto.nombre}}</li>
+        <li class="list-group-item"><strong>Descripción: </strong>
+          <p>{{producto.descripcion}} </p>
+        </li>
+        <li class="list-group-item"><strong>Origen: </strong>{{producto.origen}} </li>
+
+        <li class="list-group-item" *ngIf="propio"><strong>Posicionamiento: </strong>{{producto.posicionamiento}} </li>
+
+        <li class="list-group-item" *ngIf="!propio"><strong>Marca: </strong>{{producto.marca}} </li>
+        <li class="list-group-item" *ngIf="!propio"><strong>Nivel de partnership: </strong>{{producto.partnership}} </li>
+
+        <li class="list-group-item"><strong>Tecnologias: </strong>
+          <ul>
+            <li *ngFor="let tec of tecnologias">{{tec}}</li>
+          </ul>
+        </li>
+        <li class="list-group-item"><strong>Value driver: </strong>{{producto.value_driver}} </li>
+        <li class="list-group-item"><strong>Industry Lever: </strong>{{producto.industry_lever}} </li>
+        <li class="list-group-item"><strong>Caso de éxito: </strong>{{producto.caso_exito}} </li>
+        <li class="list-group-item"><strong>Referencia: </strong>{{producto.referencia}} </li>
+      </ul>
+    </div>
+  </div>
+  <br>
+</div>
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="cargando">
+  <div class="row">
+    <div class="col">
+        <h1 class="lead">
+          Cargando datos . . .
+        </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <mat-spinner class="mx-auto"></mat-spinner>
+    </div>
+  </div>
+</div>
+<hr>

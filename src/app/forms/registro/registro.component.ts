@@ -6,6 +6,7 @@ import { puestos } from 'src/app/interfaces/puestos.interface';
 import { contacto } from 'src/app/interfaces/contacto.interface';
 import { ContactoService } from 'src/app/services/contacto.service';
 import { SessionService } from 'src/app/services/session.service';
+import { CorreosService } from 'src/app/services/correos.service';
 
 @Component({
   selector: 'app-registro',
@@ -14,24 +15,25 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class RegistroComponent implements OnInit {
 
-  constructor(
+  constructor( 
     private router: Router, 
     private fb: FormBuilder, 
     private catServices:CatalogosService,
     private contactoService:ContactoService,
-    private session:SessionService) {
+    private session:SessionService,
+    private correos: CorreosService) {
    }
 
   ngOnInit() {
     this.loged();
     this.newUserForm =  this.fb.group({
-      nombre_usuario : ['',[Validators.required]],
-      contraseña : ['',[Validators.required]],
-      nombres : ['',[Validators.required]],
-      apellidos : ['',[Validators.required]],
+      nombre_usuario : ['',[Validators.required,Validators.minLength(8),Validators.maxLength(30)]],
+      contraseña : ['',[Validators.required,Validators.minLength(6),Validators.maxLength(12)]],
+      nombres : ['',[Validators.required,Validators.maxLength(50)]],
+      apellidos : ['',[Validators.required,Validators.maxLength(50)]],
       fk_id_puesto : ['',[Validators.required]],
-      telefono : ['',[Validators.required, Validators.pattern(/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/)]],
-      email : ['',[Validators.required, Validators.email]],
+      telefono : ['',[Validators.required, Validators.pattern(/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/),Validators.maxLength(30)]],
+      email : ['',[Validators.required, Validators.email,Validators.maxLength(30)]],
       tipo_usuario : ['admin'],
       estatus_registro : [2]
     });
@@ -63,6 +65,14 @@ export class RegistroComponent implements OnInit {
     this.registrando = false;
     this.contactoService.add(formdata).subscribe(
       res => {
+        this.correos.registro(
+          {
+            "email_origen" : formdata.email,
+            "nombre" : formdata.nombres,
+            "usuario" : formdata.nombre_usuario,
+            "contra" : formdata.contraseña
+          }
+        ).subscribe(res => {},err => {});
         setTimeout(() => {
           this.session.saveSession(res);
           this.routeTo('inicio');

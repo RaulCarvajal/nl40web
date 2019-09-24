@@ -11,41 +11,54 @@
         <mat-form-field class="w-100">
           <input matInput placeholder="Dirección" formControlName="direccion">
         </mat-form-field>
+        <div *ngIf="dirForm.get('direccion').errors&&dirForm.get('direccion').dirty">
+          <p *ngIf="dirForm.get('direccion').hasError('maxlength')" class="text-danger">Máximo 150 caracteres</p>
+          <p *ngIf="dirForm.get('direccion').hasError('required')" class="text-danger">Este campo requerido</p>
+        </div>
       </div>
       <div class="col-sm-12 col-md-3 col-lg-4">
         <mat-form-field class="w-100">
           <mat-label>Tipo de sede</mat-label>
-          <mat-select formControlName="tipo_sede">
+          <mat-select formControlName="tipo_sede" class="md-select-menu-container">
             <mat-option *ngFor="let ts of tipo_sede" [value]="ts.id_cat_sede">{{ts.tipo_sede}}</mat-option>
           </mat-select>
         </mat-form-field>
+        <div *ngIf="dirForm.get('tipo_sede').errors&&dirForm.get('tipo_sede').dirty">
+          <p *ngIf="dirForm.get('tipo_sede').hasError('required')" class="text-danger">Este campo requerido</p>
+        </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12 col-md-4 col-lg-4">
         <mat-form-field class="w-100">
           <mat-label>País</mat-label>
-          <mat-select formControlName="pais">
+          <mat-select formControlName="pais" class="md-select-menu-container">
             <mat-option *ngFor="let pais of paises" [value]="pais.nombre">{{pais.nombre}}</mat-option>
           </mat-select>
         </mat-form-field>
+        <div *ngIf="dirForm.get('pais').errors&&dirForm.get('pais').dirty">
+          <p *ngIf="dirForm.get('pais').hasError('required')" class="text-danger">Este campo requerido</p>
+        </div>
       </div>
       <div class="col-sm-12 col-md-4 col-lg-4">
         <mat-form-field class="w-100">
           <mat-label>Estado / Provincia / Departamento</mat-label>
-          <mat-select formControlName="estado">
-            <mat-option *ngFor="let estado of estados" [value]="estado.nombre_estado">{{estado.nombre_estado}}</mat-option>
+          <mat-select formControlName="estado" (selectionChange)="getMunicipio()" class="md-select-menu-container">
+            <mat-option *ngFor="let estado of estados" [value]="estado.id_estado">{{estado.nombre_estado}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="col-sm-12 col-md-4 col-lg-4">
         <mat-form-field class="w-100">
-          <input matInput placeholder="Municipio" formControlName="municipio">
-          <!--<mat-label>Municipio</mat-label>
-          <mat-select formControlName="municipio">
-            <mat-option *ngFor="let sector of sectores" [value]="sector.sec">{{sector.sec}}</mat-option>
-          </mat-select>-->
+          <!--<input matInput placeholder="Municipio" formControlName="municipio">-->
+          <mat-label>Municipio</mat-label>
+          <mat-select formControlName="municipio" class="md-select-menu-container">
+            <mat-option *ngFor="let municipio of municipios" [value]="municipio.nombre_municipio">{{municipio.nombre_municipio}}</mat-option>
+          </mat-select>
         </mat-form-field>
+        <div *ngIf="dirForm.get('municipio').errors&&dirForm.get('municipio').dirty">
+          <p *ngIf="dirForm.get('municipio').hasError('required')" class="text-danger">Este campo requerido</p>
+        </div>
       </div>
     </div>
     <hr>
