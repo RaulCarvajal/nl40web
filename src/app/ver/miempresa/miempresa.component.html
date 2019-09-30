@@ -12,12 +12,23 @@
   <div class="row">
     <div class="col">
       <ul class="list-group">
-        <li class="list-group-item"><strong>Nombre empresa: </strong>{{empresa.nombre}}</li>
-        <li class="list-group-item"><strong>Razón social: </strong>{{empresa.razon_social}}</li>
-        <li class="list-group-item"><strong>RFC: </strong>{{empresa.rfc}}</li>
+        <li class="list-group-item">
+          <strong>Datos básicos</strong><a routerLink="/editar/empresa" routerLinkActive="active"><mat-icon>edit</mat-icon></a>
+          <ul>
+            <li>
+                <strong>Nombre empresa: </strong>{{empresa.nombre}}
+            </li>
+            <li>
+                <strong>Razón social: </strong>{{empresa.razon_social}}
+            </li>
+            <li>
+                <strong>RFC: </strong>{{empresa.rfc}}
+            </li>
+          </ul>
+        </li>
         <li class="list-group-item">
           <strong>Ubicación de las oficinas:</strong>
-          <div>
+          <div *ngIf="!nulldirs">
             <tabset>
               <tab *ngFor="let dir of direcciones; let pointIndex=index" heading="{{pointIndex+1}} - {{dir.tipo_sede}}">
                 <ul>
@@ -25,9 +36,14 @@
                   <li><em>Pais: </em>{{dir.pais}}</li>
                   <li><em>Estado: </em>{{dir.estado}}</li>
                   <li><em>Municipio: </em>{{dir.municipio}}</li>
+                  <li><a routerLink='/editar/direcciones/{{dir.id}}' routerLinkActive='active'>Editar - <mat-icon>edit</mat-icon></a></li>
+                  <li><a class="text-danger" routerLink='/eliminar/direccion/{{dir.id}}' routerLinkActive='active'>Eliminar - <mat-icon>delete_forever</mat-icon></a></li>
                 </ul>
               </tab>
             </tabset>
+          </div>
+          <div class="text-center" *ngIf="nulldirs">
+            <h1 class="lead">Sin direcciones registradas</h1>
           </div>
           <ngb-accordion>
             <ngb-panel title="Agregar nueva direccíon">
@@ -37,10 +53,10 @@
             </ngb-panel>
           </ngb-accordion>
         </li>
-        <li class="list-group-item"><strong>Sitio web: </strong><a href="{{empresa.web}}">{{empresa.web}}</a></li>
         <li class="list-group-item">
-          <strong>Participación en las redes sociales</strong>
+          <strong>Participación en la web</strong><a routerLink="/editar/empresa" routerLinkActive="active"><mat-icon>edit</mat-icon></a>
           <ul>
+            <li><em>Sitio web: </em><a href="{{empresa.web}}">{{empresa.web}}</a></li>
             <li><em>Linked In: </em><a href="{{empresa.linkedin}}">{{empresa.linkedin}}</a></li>
             <li><em>Facebook: </em><a href="{{empresa.facebook}}">{{empresa.facebook}}</a></li>
             <li><em>Twitter: </em><a href="{{empresa.twitter}}">{{empresa.twitter}}</a></li>
@@ -64,7 +80,9 @@
             </div>
           </div>
         </li>
-        <li class="list-group-item"><strong>Fecha de creación </strong> {{fecha}} <strong>- {{desde}} se encuentra en el mercado </strong></li>
+        <li class="list-group-item">
+          <strong>Fecha de creación </strong> {{fecha}} <strong>- {{desde}} se encuentra en el mercado </strong> <a routerLink="/editar/empresa" routerLinkActive="active"><mat-icon>edit</mat-icon></a>
+        </li>
         <li class="list-group-item">
           <strong>Datos del contacto principal</strong>
           <ul>
@@ -144,7 +162,7 @@
               <strong>Propios</strong>
             </li>
             <div class="w-100" *ngIf="!nullpp">
-              <p class="mx-auto"><strong>SIN PRODUCTOS REGISTRADOS.</strong></p>
+              <p class="mx-auto lead">Sin productos registrados</p>
             </div>
             <div *ngIf="nullpp">
               <table class="table table-hover">
@@ -179,7 +197,7 @@
               <strong>Tercero</strong>
             </li>
             <div class="w-100" *ngIf="!nullpt">
-              <p class="mx-auto"><strong>SIN PRODUCTOS REGISTRADOS.</strong></p>
+              <p class="mx-auto lead">Sin productos registrados</p>
             </div>
             <div *ngIf="nullpt">
               <table class="table table-hover">
@@ -216,14 +234,14 @@
         <li class="list-group-item">
           <ul>
             <li>
-              <strong>Oferta valor de la organización</strong><br>
+              <strong>Oferta valor de la organización</strong><a routerLink="/editar/empresa" routerLinkActive="active"><mat-icon>edit</mat-icon></a><br>
               <p class="text-justify">
                 {{info_gnrl.descripcion_oferta_valor}}
               </p>
             </li>
             <br>
             <li>
-              <strong>Sectores atendidos por la organización</strong><small>(Finanzas, Comercio, Industria, Servicios, Gobierno)</small>
+              <strong>Sectores atendidos por la organización</strong><small>(Finanzas, Comercio, Industria, Servicios, Gobierno)</small><a routerLink="/editar/empresa" routerLinkActive="active"><mat-icon>edit</mat-icon></a>
               <br>
               <ul class="list-group list-group-horizontal-sm">
                 <li class="list-group-item" *ngFor="let sec of sectores_a">{{sec}}</li>
@@ -231,7 +249,7 @@
             </li>
             <br>
             <li>
-              <strong>5 Principales clientes</strong><br>
+              <strong>5 Principales clientes</strong><a routerLink="/editar/empresa" routerLinkActive="active"><mat-icon>edit</mat-icon></a><br>
               {{info_gnrl.principales_clientes}}
             </li>
             <br>
@@ -263,3 +281,6 @@
     </div>
   </div>
 </div>
+<hr>
+<br>
+<app-footer></app-footer>

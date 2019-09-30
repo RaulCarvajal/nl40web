@@ -20,6 +20,14 @@ export class DireccionesService {
       return this.http.get<direccion_get[]>(`http://${uri_port.url}:${uri_port.port}/api/direcciones/${id}`);
     }
 
+    delete(id: number){
+      return this.http.delete<any>(`http://${uri_port.url}:${uri_port.port}/api/direcciones/${id}`);
+    }
+
+    update(data: any){
+      return this.http.put<any>(`http://${uri_port.url}:${uri_port.port}/api/direcciones`,data);
+    }
+
     existeDirFiscal(id:number){
       return this.http.get<boolean>(`http://${uri_port.url}:${uri_port.port}/api/existeDirFiscal/${id}`);
     }

@@ -1,0 +1,187 @@
+<app-navbar></app-navbar>
+<hr>
+<hr>
+
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="!cargando">
+  <div class="row">
+    <div class="col">
+      <h1 class="display-4"><a role="button" class="btn btn-outline-primary" (click)="return()"><mat-icon>keyboard_arrow_left</mat-icon></a>Actualización de datos</h1>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <form class="example-form" [formGroup]="empresaForm" (ngSubmit)="update()">
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Nombre Empresa" formControlName="nombre" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+              </mat-form-field>
+              <div *ngIf="empresaForm.get('nombre').errors&&empresaForm.get('nombre').dirty">
+                <p *ngIf="empresaForm.get('nombre').hasError('required')" class="text-danger">Este campo es requerido</p>
+                <p *ngIf="empresaForm.get('nombre').hasError('maxlength')" class="text-danger">Máximo 150 caracteres</p>
+              </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Razón social" formControlName="razon_social">
+            </mat-form-field>
+            <div *ngIf="empresaForm.get('razon_social').errors&&empresaForm.get('razon_social').dirty">
+              <p *ngIf="empresaForm.get('razon_social').hasError('required')" class="text-danger">Este campo es requerido</p>
+              <p *ngIf="empresaForm.get('razon_social').hasError('maxlength')" class="text-danger">Máximo 150 caracteres</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="RFC" formControlName="rfc">
+              </mat-form-field>
+              <div *ngIf="empresaForm.get('rfc').errors&&empresaForm.get('rfc').dirty">
+                <p *ngIf="empresaForm.get('rfc').hasError('required')" class="text-danger">Este campo es requerido</p>
+                <p *ngIf="empresaForm.get('rfc').hasError('maxlength')" class="text-danger">Máximo 13 caracteres</p>
+                <p *ngIf="empresaForm.get('rfc').hasError('minlength')" class="text-danger">Mínimo 12 caracteres</p>
+              </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput [matDatepicker]="picker" placeholder="Fecha de creación" formControlName="fecha_creación">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div *ngIf="empresaForm.get('fecha_creación').errors&&empresaForm.get('fecha_creación').dirty">
+              <p *ngIf="empresaForm.get('fecha_creación').hasError('required')" class="text-danger">Este campo es requerido</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h1 class="lead">Participación en las redes sociales</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Web de la Empresa" formControlName="web">
+              </mat-form-field>
+              <div *ngIf="empresaForm.get('web').errors&&empresaForm.get('web').dirty">
+                <p *ngIf="empresaForm.get('web').hasError('pattern')" class="text-danger">No coincide con una URL válida</p>
+                <p *ngIf="empresaForm.get('web').hasError('maxlength')" class="text-danger">Máximo 100 caracteres</p>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Linkedin (Liga a su perfil)" formControlName="linkedin">
+            </mat-form-field>
+            <div *ngIf="empresaForm.get('linkedin').errors&&empresaForm.get('linkedin').dirty">
+              <p *ngIf="empresaForm.get('linkedin').hasError('pattern')" class="text-danger">No coincide con una URL válida</p>
+              <p *ngIf="empresaForm.get('linkedin').hasError('maxlength')" class="text-danger">Máximo 100 caracteres</p>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Facebook (Liga a su perfil)" formControlName="facebook">
+            </mat-form-field>
+            <div *ngIf="empresaForm.get('facebook').errors&&empresaForm.get('facebook').dirty">
+              <p *ngIf="empresaForm.get('facebook').hasError('pattern')" class="text-danger">No coincide con una URL válida</p>
+              <p *ngIf="empresaForm.get('facebook').hasError('maxlength')" class="text-danger">Máximo 100 caracteres</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Twitter (Liga a su perfil)" formControlName="twitter">
+            </mat-form-field>
+            <div *ngIf="empresaForm.get('twitter').errors&&empresaForm.get('twitter').dirty">
+              <p *ngIf="empresaForm.get('twitter').hasError('pattern')" class="text-danger">No coincide con una URL válida</p>
+              <p *ngIf="empresaForm.get('twitter').hasError('maxlength')" class="text-danger">Máximo 100 caracteres</p>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Instagram (Liga a su perfil)" formControlName="instagram">
+            </mat-form-field>
+            <div *ngIf="empresaForm.get('instagram').errors&&empresaForm.get('instagram').dirty">
+              <p *ngIf="empresaForm.get('instagram').hasError('pattern')" class="text-danger">No coincide con una URL válida</p>
+              <p *ngIf="empresaForm.get('instagram').hasError('maxlength')" class="text-danger">Máximo 100 caracteres</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h1 class="lead">Datos adicionales</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field class="w-100">
+              <textarea matInput placeholder="Describa brevemente (500 caracteres) la oferta de valor de su organización:" formControlName="descripcion_oferta_valor"></textarea>
+            </mat-form-field>
+            <div *ngIf="empresaForm.get('descripcion_oferta_valor').errors&&empresaForm.get('descripcion_oferta_valor').dirty">
+              <p *ngIf="empresaForm.get('descripcion_oferta_valor').hasError('maxlength')" class="text-danger">Máximo 500 caracteres</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="">
+              Sectores atendidos actualmente: {{sect}}
+            </div>
+            <mat-form-field class="w-100">
+              <mat-label>Sectores atendidos por su organización <small>Si desea modificarlos, seleccione en la sección siguiente</small></mat-label>
+              <mat-select multiple formControlName="sectores_atendidos">
+                <mat-option *ngFor="let sector of sectoresA" [value]="sector.nombre_sector">{{sector.nombre_sector}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="empresaForm.get('sectores_atendidos').errors&&empresaForm.get('sectores_atendidos').dirty">
+              <p *ngIf="empresaForm.get('sectores_atendidos').hasError('required')" class="text-danger">Este campo es requerido</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field class="w-100">
+              <textarea matInput placeholder="Menciona los 5 Principales clientes de su empresa" formControlName="clientes_sectores"></textarea>
+            </mat-form-field>
+            <div *ngIf="empresaForm.get('clientes_sectores').errors&&empresaForm.get('clientes_sectores').dirty">
+              <p *ngIf="empresaForm.get('clientes_sectores').hasError('required')" class="text-danger">Este campo es requerido</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-right">
+            <button type="submit" class="btn btn-success" style="margin-left: 10px; width: 100px;" [disabled]="empresaForm.invalid">Actualizar</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="offset-lg-5 col-lg-1 offset-md-5 col-md-1 offset-sm-4 col-sm-2">
+            <mat-spinner *ngIf="saving"></mat-spinner>
+            <h1 class="lead text-danger" *ngIf="error">Error en registro</h1>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<br><br>
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="cargando">
+  <div class="row">
+    <div class="col">
+        <h1 class="lead">
+          Cargando datos . . .
+        </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <mat-spinner class="mx-auto"></mat-spinner>
+    </div>
+  </div>
+</div>
+<br>
+<hr>
+<app-footer></app-footer>

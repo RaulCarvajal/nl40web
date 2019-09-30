@@ -15,3 +15,18 @@ export interface empresa_get {
     cobertura_nacional :string,
     cobertura_internacional : string
 }
+
+export interface empresa_table {
+    nombre : string,
+    razon_social : string,
+    rfc : string,
+    web : string,
+    linkedin : string,
+    facebook : string,
+    twitter : string,
+    instagram : string,
+    fecha_creación : string,
+    descripcion_oferta_valor : string,
+    sectores_atendidos : string,
+    principales_clientes : string,
+}

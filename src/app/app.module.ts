@@ -31,12 +31,16 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DireccionesService } from './services/direcciones.service';
 import { EstatService } from './services/estat.service';
 import { ProductosService } from './services/productos.service';
-import { MiempresaComponent } from './miempresa/miempresa.component';
+import { MiempresaComponent } from './ver/miempresa/miempresa.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTableModule } from '@angular/material/table';
-import { ProductoComponent } from './producto/producto.component';
-import { CorreosService } from './services/correos.service';
+import { ProductoComponent } from './ver/producto/producto.component';
+import { CorreosService } from './services/correos.service'; 
+import { FooterComponent } from './footer/footer.component';
+import { EditarEmpresaComponent } from './editar/editar-empresa/editar-empresa.component';
+import { EditarDireccionComponent } from './editar/editar-direccion/editar-direccion.component';
+import { EliminarDireccionComponent } from './eliminar/eliminar-direccion/eliminar-direccion.component';
 
 
 @NgModule({
@@ -53,7 +57,11 @@ import { CorreosService } from './services/correos.service';
     NavbarComponent,
     ConstruccionComponent,
     MiempresaComponent,
-    ProductoComponent
+    ProductoComponent,
+    FooterComponent,
+    EditarEmpresaComponent,
+    EditarDireccionComponent,
+    EliminarDireccionComponent
   ],
   imports: [
     BrowserModule,

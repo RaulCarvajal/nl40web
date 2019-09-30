@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from '../services/session.service';
-import { EmpresaService } from '../services/empresa.service';
-import { empresa_get } from '../interfaces/empresa_get.interface';
+import { SessionService } from '../../services/session.service';
+import { EmpresaService } from '../../services/empresa.service';
+import { empresa_get } from '../../interfaces/empresa_get.interface';
 import * as moment from 'moment';
-import { DireccionesService } from '../services/direcciones.service';
-import { direccion_get } from '../interfaces/direcciones_get.interface';
-import { EstatService } from '../services/estat.service';
-import { estatificacion } from '../interfaces/estat.interface';
-import { producto } from '../interfaces/productos.interface';
-import { ProductosService } from '../services/productos.service';
-import { info_gnlr } from '../interfaces/empresa.interface';
+import { DireccionesService } from '../../services/direcciones.service';
+import { direccion_get } from '../../interfaces/direcciones_get.interface';
+import { EstatService } from '../../services/estat.service';
+import { estatificacion } from '../../interfaces/estat.interface';
+import { producto } from '../../interfaces/productos.interface';
+import { ProductosService } from '../../services/productos.service';
+import { info_gnlr } from '../../interfaces/empresa.interface';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -54,6 +54,7 @@ export class MiempresaComponent implements OnInit {
   cargando: boolean = true;
   nullpt: boolean = true;
   nullpp: boolean = true;
+  nulldirs: boolean = true;
 
   getEmpresa(){
     this.empresas.get(this.session.getEmpresaId()).subscribe(
@@ -74,6 +75,9 @@ export class MiempresaComponent implements OnInit {
     this.direccionesService.get(this.session.getEmpresaId()).subscribe(
       res => {
         this.direcciones = res;
+        if(this.direcciones.length != 0){
+          this.nulldirs = false;
+        }
       },
       err => {
         console.error(err);
@@ -134,7 +138,7 @@ export class MiempresaComponent implements OnInit {
     this.sectores_a = this.info_gnrl.sectores_atendidos.split(',');
     this.sectores_a.shift();
   }
-  getOrganizaciones(){
+  getOrganizaciones(){ 
     this.organizaciones = this.info_gnrl.organizaciones.split(',');
   }
   getDates(){

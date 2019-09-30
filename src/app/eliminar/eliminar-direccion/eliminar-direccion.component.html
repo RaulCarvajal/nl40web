@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+<hr>
+<hr>
+
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="!cargando">
+  <div class="row">
+    <div class="col">
+      <h1 class="display-4"><a role="button" class="btn btn-outline-primary" (click)="return()"><mat-icon>keyboard_arrow_left</mat-icon></a>Eliminar</h1>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col mx-auto">
+      <div class="text-center">
+        <h1 class="lead">¿Desea eliminar esta dirección?</h1>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col text-right">
+      <button class="btn btn-primary mx-auto" style="width: 100px" (click)="return()">NO</button>
+    </div>
+    <div class="col text-left">
+      <button class="btn btn-danger mx-auto" style="width: 100px" (click)="eliminar()">SI</button>
+    </div>
+  </div>
+</div>
+<br><br>
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="cargando">
+  <div class="row">
+    <div class="col">
+        <h1 class="lead">
+          Cargando datos . . .
+        </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <mat-spinner class="mx-auto"></mat-spinner>
+    </div>
+  </div>
+</div>
+<hr>
+<br>
+<app-footer></app-footer>
