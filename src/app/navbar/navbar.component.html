@@ -16,7 +16,7 @@
           <a class="nav-link text-dark" routerLink="/productos" routerLinkActive="active">Mis productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" routerLink="/estatificacion" routerLinkActive="active">Estatificación</a>
+          <a class="nav-link text-dark" routerLink="/estratificacion" routerLinkActive="active">Estratificación</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-dark" routerLink="/colaboradores" routerLinkActive="active">Mis colaboradores</a>
@@ -25,9 +25,10 @@
       <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <strong>{{nombre}}({{tipo_user}})</strong><mat-icon>account_circle</mat-icon>
+                <mat-icon class="aligned-with-icon">account_circle</mat-icon>
               </a>
               <div class="dropdown-menu mr-auto" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item disabled" [routerLink]="colaboradores">{{nombre}}({{tipo_user}})</a>
                 <a class="dropdown-item" [routerLink]="colaboradores">Mi cuenta</a>
                 <a class="dropdown-item text-danger" (click)="closeSession()" >Cerrar sesión</a>
               </div>

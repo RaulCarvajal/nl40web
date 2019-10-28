@@ -36,19 +36,21 @@ export class FormProductosComponent implements OnInit {
   tercero: boolean = false;
   guardado: boolean = false;
 
+  not_wss = /^\S/;
+
   ngOnInit() {
     this.formProducto = this.fb.group({
-      nombre_producto : [null,[Validators.required, Validators.maxLength(100)]],
+      nombre_producto : [null,[Validators.required, Validators.maxLength(100), Validators.pattern(this.not_wss)]],
       tipo : [null,[Validators.required]],
-      descripcion_producto : [null,[Validators.required, Validators.maxLength(500)]],
+      descripcion_producto : [null,[Validators.required, Validators.maxLength(500), Validators.pattern(this.not_wss)]],
       tecnologias : [null,[Validators.required]],
-      marca : [null,[Validators.maxLength(100)]],
+      marca : [null,[Validators.maxLength(100), Validators.pattern(this.not_wss)]],
       nivel_partnership : [null,[]],
       posicionamiento : [null,[]],
       value_driver : [null,[Validators.required]],
       industry_lever : [null,[Validators.required]],
-      caso_exito : [null,[Validators.required]],
-      referencia : [null,[Validators.required]]
+      caso_exito : [null,[Validators.required, Validators.pattern(this.not_wss)]],
+      referencia : [null,[Validators.required, Validators.pattern(this.not_wss)]] 
     });
 
     this.getCats();

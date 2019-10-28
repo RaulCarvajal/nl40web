@@ -63,7 +63,7 @@
     </div>
     <hr>
 
-    <div class="row">
+    <div class="row" *ngIf="!guardado">
       <div class="col-12 text-right">
         <button type="reset" id="reset" class="btn btn-danger" style="width: 100px;">Limpiar</button>
         <button type="submit" class="btn btn-success" style="margin-left: 10px; width: 100px;" [disabled]="dirForm.invalid">Guardar</button>
@@ -72,7 +72,13 @@
 
     <div class="row">
       <div class="col-12 text-left">
-        <small class="text-danger"><strong>* TODOS LOS CAMPOS SON REQUERIDOS <br> **POR EL MOMENTO SOLO DISPONIBLE MÉXICO</strong></small>
+        <small class="text-danger">
+          <strong>
+            * TODOS LOS CAMPOS SON REQUERIDOS<br> 
+            * POR EL MOMENTO SOLO DISPONIBLE MÉXICO<br>
+            * SOLO PUEDE EXISTIR UNA DIRECCION FISCAL
+          </strong>
+        </small>
       </div>
     </div>
     <div class="row">
@@ -94,6 +100,19 @@
     </div>
     <div class="col-lg-2 col-md-2 col-sm-2">
       <button type="button" class="btn btn-success w-100" (click)="finalizar()">Finalizar</button>
+    </div>
+  </div>
+  <hr>
+  <div class="row" *ngIf="!nulldirs">
+    <div class="col">
+      <strong>Direcciónes guardadas:</strong>
+      <div>
+        <ul class="list-group list-group-sm">
+          <li class="list-group-item" *ngFor="let dir of direcciones">
+            {{dir.direccion}}, {{dir.municipio}}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

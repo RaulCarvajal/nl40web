@@ -27,12 +27,12 @@ export class RegistroComponent implements OnInit {
   ngOnInit() {
     this.loged();
     this.newUserForm =  this.fb.group({
-      nombre_usuario : ['',[Validators.required,Validators.minLength(8),Validators.maxLength(30)]],
-      contraseña : ['',[Validators.required,Validators.minLength(6),Validators.maxLength(12)]],
-      nombres : ['',[Validators.required,Validators.maxLength(50)]],
-      apellidos : ['',[Validators.required,Validators.maxLength(50)]],
+      nombre_usuario : ['',[Validators.required,Validators.minLength(8),Validators.maxLength(30),Validators.pattern(/^[a-zA-Z0-9]*$/)]],
+      contraseña : ['',[Validators.required,Validators.minLength(6),Validators.maxLength(12),Validators.pattern(/^[a-zA-Z0-9]*$/)]],
+      nombres : ['',[Validators.required,Validators.maxLength(50),Validators.pattern(this.not_wss)]],
+      apellidos : ['',[Validators.required,Validators.maxLength(50),Validators.pattern(this.not_wss)]],
       fk_id_puesto : ['',[Validators.required]],
-      telefono : ['',[Validators.required, Validators.pattern(/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/),Validators.maxLength(30)]],
+      telefono : ['',[Validators.required, Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/),Validators.maxLength(20),Validators.minLength(10)]],
       email : ['',[Validators.required, Validators.email,Validators.maxLength(30)]],
       tipo_usuario : ['admin'],
       estatus_registro : [2]
@@ -45,6 +45,7 @@ export class RegistroComponent implements OnInit {
   sp: Boolean = true;
   puestos:puestos[];
   registrando:boolean = true;
+  not_wss = /^\S/;
 
   getPuestos(){
     this.catServices.getPuestos().subscribe(

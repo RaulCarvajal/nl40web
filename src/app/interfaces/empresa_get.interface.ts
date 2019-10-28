@@ -29,4 +29,17 @@ export interface empresa_table {
     descripcion_oferta_valor : string,
     sectores_atendidos : string,
     principales_clientes : string,
+    orgs_emp : org_emp[],
+    cobertura : cobertura
+}
+
+interface org_emp {
+    fk_id_empresa : number,
+    fk_id_org : number,
+    id_orgs_emp : number
+}
+interface cobertura {
+    id_cobertura : number,
+    internacional : string,
+    nacional : string
 }

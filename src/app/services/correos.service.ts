@@ -15,4 +15,8 @@ export class CorreosService {
   registro(data : any){
     return this.http.post<any>(`http://${uri_port.url}:${uri_port.port}/api/registro`,data)
   }
+
+  registroColaborador(data : any){
+    return this.http.post<any>(`http://${uri_port.url}:${uri_port.port}/api/colaborador_email`,data)
+  }
 }

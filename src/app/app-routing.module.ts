@@ -9,10 +9,14 @@ import { ConstruccionComponent } from './construccion/construccion.component';
 import { ProductoComponent } from './ver/producto/producto.component';
 import { EditarEmpresaComponent } from './editar/editar-empresa/editar-empresa.component';
 import { EditarDireccionComponent } from './editar/editar-direccion/editar-direccion.component';
+import { EditarEstatificacionComponent } from './editar/editar-estatificacion/editar-estatificacion.component';
 import { EliminarDireccionComponent } from './eliminar/eliminar-direccion/eliminar-direccion.component';
-
-
-
+import { EstratificacionComponent } from './ver/estratificacion/estratificacion.component';
+import { ColaboradoresComponent } from './ver/colaboradores/colaboradores.component';
+import { AgregarDireccionComponent } from './agregar/agregar-direccion/agregar-direccion.component';
+import { AgregarColaboradorComponent } from './agregar/agregar-colaborador/agregar-colaborador.component';
+import { EliminarColaboradorComponent } from './eliminar/eliminar-colaborador/eliminar-colaborador.component';
+import { EditarColaboradorComponent } from './editar/editar-colaborador/editar-colaborador.component';
 
 const routes: Routes = [
   {path : 'registro', component : RegistroComponent},
@@ -21,12 +25,17 @@ const routes: Routes = [
   {path : 'empresa', component : MiempresaComponent},
   {path : 'producto/:id', component : ProductoComponent},
   {path : 'productos', component : ConstruccionComponent},
-  {path : 'estatificacion', component : ConstruccionComponent},
-  {path : 'colaboradores', component : ConstruccionComponent},
+  {path : 'estratificacion', component : EstratificacionComponent},
+  {path : 'colaboradores', component : ColaboradoresComponent},
   {path : 'editar/direcciones/:id', component : EditarDireccionComponent},
   {path : 'editar/empresa', component : EditarEmpresaComponent},
+  {path : 'editar/estratificacion', component : EditarEstatificacionComponent},
+  {path : 'editar/colaborador/:id', component : EditarColaboradorComponent},
   {path : 'eliminar/empresa', component : EditarEmpresaComponent},
-  {path : 'eliminar/direccion/:id', component : EliminarDireccionComponent}
+  {path : 'eliminar/direccion/:id', component : EliminarDireccionComponent},
+  {path : 'eliminar/colaborador/:id', component : EliminarColaboradorComponent},
+  {path : 'agregar/direccion', component : AgregarDireccionComponent},
+  {path : 'agregar/colaborador', component : AgregarColaboradorComponent}
 ];
 
 @NgModule({

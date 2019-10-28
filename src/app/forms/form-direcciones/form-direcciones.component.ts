@@ -7,6 +7,7 @@ import { municipio } from 'src/app/interfaces/municipios.interface';
 import { SessionService } from 'src/app/services/session.service';
 import { DireccionesService } from 'src/app/services/direcciones.service';
 import { Router } from '@angular/router';
+import { direccion_get } from 'src/app/interfaces/direcciones_get.interface';
 
 @Component({
   selector: 'app-form-direcciones',
@@ -36,6 +37,7 @@ export class FormDireccionesComponent implements OnInit {
       contacto_id : this.session.getContactoId()*/
     this.getTipoSede();
     this.getEstados();
+    this.getDirs();
   }
 
   dirForm: FormGroup;
@@ -51,10 +53,13 @@ export class FormDireccionesComponent implements OnInit {
   guardado: boolean = false;
   exdirfis: boolean = false;
 
+  direcciones:direccion_get[];
+  nulldirs: boolean = true;
+
+
   get getDirecciones(){ 
     return this.dirForm.get('direcciones') as FormArray;
   }
-
   getTipoSede(){
     this.catalogos.getTipoSede().subscribe(
       res => {
@@ -92,11 +97,13 @@ export class FormDireccionesComponent implements OnInit {
     this.saving = true;
     this.direccionesService.save(this.dirForm.value).subscribe(
       res => {
+        document.getElementById('reset').click();
         this.session.updateSession();
         this.saving = false;
         this.dirForm.disable();
         this.guardado = true;
         this.existeDirFiscal();
+        this.getDirs();
       },
       err => {
         this.error=true;
@@ -111,19 +118,35 @@ export class FormDireccionesComponent implements OnInit {
     return this.estados.find(e => { return e.id_estado > this.dirForm.value.estado-1; }).nombre_estado;
   }
   addOtro(){
-    document.getElementById('reset').click();
-    this.dirForm.enable();
     this.ocultar = false;
     this.guardado = false;
+    this.dirForm.enable();
   }
   existeDirFiscal(){
     this.direccionesService.existeDirFiscal(this.session.getEmpresaId()).subscribe(
       res => {
-        res? this.tipo_sede.shift():null;
+        console.log(res);
+        if(this.tipo_sede.length == 3){
+          res ? console.log(this.tipo_sede.shift()) : null;
+        }
       },
       err => { 
         console.error(err);
       }
     );
   }
+  getDirs(){
+    this.direccionesService.get(this.session.getEmpresaId()).subscribe(
+      res => {
+        this.direcciones = res;
+        if(this.direcciones.length != 0){
+          this.nulldirs = false;
+        }
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+  
 }

@@ -1,9 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { 
-    /*min-height: 100%;
-    position: relative;*/
-}
 html{
     min-height: 100%;
     position: relative;
@@ -19,4 +15,30 @@ body {
     bottom: 0;
     width: 100%;
     background-color:#0E273B;
+}
+
+.inline-icon {
+    vertical-align:top;
+    font-size: 40px !important;
+}
+
+.text-med {
+    font-size: 40px !important;
+}
+
+@media (min-width: 768px) { 
+    .md-hide{
+        display: block;
+    }
+    .sm-hide{
+        display: none;
+    }
+}
+@media (max-width: 768px) { 
+    .md-hide{
+        display: none;
+    }
+    .sm-hide{
+        display: block;
+    }
 }

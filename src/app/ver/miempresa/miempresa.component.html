@@ -3,29 +3,61 @@
 <hr>
 
 <div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="!cargando">
+
   <div class="row">
-    <div class="col">
-      <h1 class="display-4"><a role="button" class="btn btn-outline-primary" (click)="return()"><mat-icon>keyboard_arrow_left</mat-icon></a> Información de mi empresa</h1>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">
+      <a role="button" class="btn btn-outline-primary display-2" (click)="return()" data-toggle="tooltip" data-placement="top" title="Regresar">
+        <mat-icon>arrow_back</mat-icon>
+      </a> 
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+      <a class="display-2 btn btn-outline-primary" (click)="routerTo('/editar/empresa')" data-toggle="tooltip" data-placement="top" title="Editar">
+        <mat-icon>edit</mat-icon>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h1 class="display-4 inline-icon">Mi empresa</h1>
     </div>
   </div>
   <hr>
   <div class="row">
     <div class="col">
       <ul class="list-group">
+
         <li class="list-group-item">
-          <strong>Datos básicos</strong><a routerLink="/editar/empresa" routerLinkActive="active"><mat-icon>edit</mat-icon></a>
-          <ul>
-            <li>
-                <strong>Nombre empresa: </strong>{{empresa.nombre}}
-            </li>
-            <li>
-                <strong>Razón social: </strong>{{empresa.razon_social}}
-            </li>
-            <li>
-                <strong>RFC: </strong>{{empresa.rfc}}
-            </li>
-          </ul>
+          <div class="row">
+            <div class="col">
+              <strong>Datos básicos</strong>
+              <ul>
+                <li>
+                    <em>Nombre empresa: </em>{{empresa.nombre}}
+                </li>
+                <li>
+                    <em>Razón social: </em>{{empresa.razon_social}}
+                </li>
+                <li>
+                    <em>RFC: </em>{{empresa.rfc}}
+                </li>
+              </ul>
+            </div>
+            <div class="col">
+              <strong>Datos del contacto principal</strong>
+              <ul>
+                <li><em>Nombre completo: </em>{{empresa.nombre_contacto}}</li>
+                <li><em>Puesto: </em>{{empresa.puesto_contacto}}</li>
+                <li><em>Email: </em>{{empresa.email_contacto}}</li>
+                <li><em>Teléfono: </em>{{empresa.telefono_contacto}}</li>
+              </ul>
+            </div>
+          </div>
         </li>
+
+        <li class="list-group-item">
+          <strong>Fecha de creación</strong> {{fecha}}, {{desde}} se encuentra en el mercado
+        </li>
+
         <li class="list-group-item">
           <strong>Ubicación de las oficinas:</strong>
           <div *ngIf="!nulldirs">
@@ -36,232 +68,102 @@
                   <li><em>Pais: </em>{{dir.pais}}</li>
                   <li><em>Estado: </em>{{dir.estado}}</li>
                   <li><em>Municipio: </em>{{dir.municipio}}</li>
-                  <li><a routerLink='/editar/direcciones/{{dir.id}}' routerLinkActive='active'>Editar - <mat-icon>edit</mat-icon></a></li>
-                  <li><a class="text-danger" routerLink='/eliminar/direccion/{{dir.id}}' routerLinkActive='active'>Eliminar - <mat-icon>delete_forever</mat-icon></a></li>
                 </ul>
+                <br>
+                <div class="row">
+                  <div class="col text-center">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <a role="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Editar esta dirección" routerLink='/editar/direcciones/{{dir.id}}' routerLinkActive='active'>
+                        <mat-icon>edit</mat-icon>
+                      </a>
+                      <a role="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Eliminar esta dirección" routerLink='/eliminar/direccion/{{dir.id}}' routerLinkActive='active'>
+                        <mat-icon>delete_forever</mat-icon>
+                      </a>
+                      <a role="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Agregar dirección" routerLink='/agregar/direccion' routerLinkActive='active'>
+                        <mat-icon>add_box</mat-icon>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <br>
               </tab>
             </tabset>
           </div>
+
           <div class="text-center" *ngIf="nulldirs">
             <h1 class="lead">Sin direcciones registradas</h1>
-          </div>
-          <ngb-accordion>
-            <ngb-panel title="Agregar nueva direccíon">
-              <ng-template ngbPanelContent class="fade">
-                <app-form-direcciones></app-form-direcciones>
-              </ng-template>
-            </ngb-panel>
-          </ngb-accordion>
-        </li>
-        <li class="list-group-item">
-          <strong>Participación en la web</strong><a routerLink="/editar/empresa" routerLinkActive="active"><mat-icon>edit</mat-icon></a>
-          <ul>
-            <li><em>Sitio web: </em><a href="{{empresa.web}}">{{empresa.web}}</a></li>
-            <li><em>Linked In: </em><a href="{{empresa.linkedin}}">{{empresa.linkedin}}</a></li>
-            <li><em>Facebook: </em><a href="{{empresa.facebook}}">{{empresa.facebook}}</a></li>
-            <li><em>Twitter: </em><a href="{{empresa.twitter}}">{{empresa.twitter}}</a></li>
-            <li><em>Instagram: </em><a href="{{empresa.instagram}}">{{empresa.instagram}}</a></li>
-          </ul>
-          <br>
-          <div class="container">
-            <div class="row text-center">
-              <div class="col-lg-3 col-md-3 col-sm-6">
-                <a href="{{empresa.linkedin}}"><img src="assets/linkedin.png" alt="" srcset=""></a>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-6">
-                <a href="{{empresa.facebook}}"><img src="assets/facebook.png" alt="" srcset=""></a>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-6">
-                <a href="{{empresa.twitter}}"><img src="assets/gorjeo.png" alt="" srcset=""></a>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-6">
-                <a href="{{empresa.instagram}}"><img src="assets/instagram.png" alt="" srcset=""></a>
-              </div>
-            </div>
+            <a class="lead" data-toggle="tooltip" data-placement="top" title="Agregar dirección" routerLink='/agregar/direccion' routerLinkActive='active'>Añadir nueva dirección</a>
           </div>
         </li>
+
         <li class="list-group-item">
-          <strong>Fecha de creación </strong> {{fecha}} <strong>- {{desde}} se encuentra en el mercado </strong> <a routerLink="/editar/empresa" routerLinkActive="active"><mat-icon>edit</mat-icon></a>
-        </li>
-        <li class="list-group-item">
-          <strong>Datos del contacto principal</strong>
+          <strong>Participación en la web</strong>
           <ul>
-            <li><em>Nombre completo: </em>{{empresa.nombre_contacto}}</li>
-            <li><em>Puesto: </em>{{empresa.puesto_contacto}}</li>
-            <li><em>Email: </em>{{empresa.email_contacto}}</li>
-            <li><em>Teléfono: </em>{{empresa.telefono_contacto}}</li>
+            <li><em>Sitio web:</em><br><a href="{{empresa.web}}">{{empresa.web}}</a></li>
+            <li><em>Linked In:</em><br><a href="{{empresa.linkedin}}">{{empresa.linkedin}}</a></li>
+            <li><em>Facebook:</em><br><a href="{{empresa.facebook}}">{{empresa.facebook}}</a></li>
+            <li><em>Twitter:</em><br><a href="{{empresa.twitter}}">{{empresa.twitter}}</a></li>
+            <li><em>Instagram:</em><br><a href="{{empresa.instagram}}">{{empresa.instagram}}</a></li>
           </ul>
         </li>
+
         <li class="list-group-item">
-          <strong>Cobertura</strong>
-            <ul>
-              <li>
-                <em>Nacional (México)</em>
-                <ul class="list-group list-group-horizontal-sm">
-                  <li class="list-group-item" *ngFor="let estado of estados">{{estado}}</li>
-                </ul>
-              </li>
-              <br>
-              <li>
-                <em>Internacional</em>
-                <ul class="list-group list-group-horizontal-sm">
-                  <li class="list-group-item" *ngFor="let pais of paises">{{pais}}</li>
-                </ul>
-              </li>
-            </ul>
-        </li>
-        <li class="list-group-item">
-          <strong>Estatificación de empresa según secretaría de economía</strong>
-          <ul>
-            <li>
-              <strong>Tamaño de la empresa(Personas): </strong>
-              <br>{{estat.tamano_empresa}}
-            </li>
-            <br>
-            <li>
-              <strong>Nivel de ventas anuales: </strong>
-              <br>{{estat.nivel_ventas}}
-            </li>
-            <br>
-            <li>
-              <strong>Detalle de ventas empreses sector servicios y productos TI:</strong>
-              <br>{{estat.detalle_ventas}}
-            </li>
-            <br>
-            <li>
-              <strong>Software que utilizan actualmente para sus procesos en su organizació</strong>
-              <ul class="list-group list-group-horizontal-sm">
-                <li class="list-group-item" *ngFor="let sw of software">
-                  {{sw}}
+          <strong>Alcance territorial de la oferta de tus servicios.</strong>
+          <div class="row">
+            <div class="col">
+              <ul>
+                <li>
+                  <em>Nacional (México)</em>
+                  <ul class="list-group list-group-sm list-group-flush">
+                    <li class="list-group-item" *ngFor="let estado of estados">{{estado}}</li>
+                  </ul>
                 </li>
               </ul>
-            </li>
-            <br>
-            <li>
-              <strong>Certificaciones principales con las que cuenta su organización</strong>
-              <ul class="list-group list-group-horizontal-sm">
-                <li class="list-group-item" *ngFor="let ce of certs">
-                  {{ce}}
+            </div>
+            <div class="col">
+              <ul>
+                <li>
+                  <em>Internacional</em>
+                  <ul class="list-group list-group-sm list-group-flush">
+                    <li class="list-group-item" *ngFor="let pais of paises">{{pais}}</li>
+                  </ul>
                 </li>
               </ul>
-            </li>
-            <br>
-            <li><strong>Sector al que pertenece:</strong>
-              <br>{{estat.sector}}
-            </li>
-            <br>
-            <li><strong>Tipo de empresa:</strong>
-              <br>{{estat.tipo_empresa}}
-            </li>
-          </ul>
+            </div>
+          </div>
         </li>
+
         <li class="list-group-item">
-          <strong>Productos de mi empresa:</strong>
-          <ul>
-            <li>
-              <strong>Propios</strong>
-            </li>
-            <div class="w-100" *ngIf="!nullpp">
-              <p class="mx-auto lead">Sin productos registrados</p>
-            </div>
-            <div *ngIf="nullpp">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Áreas/Tecnologias</th>
-                    <th scope="col">Posicionamiento</th>
-                    <th scope="col">Ver</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let pp of p_propios; let inx = index;">
-                    <th scope="row">{{inx+1}}</th>
-                    <td>{{pp.nombre}}</td>
-                    <td>{{tabString(pp.descripcion)}}</td>
-                    <td>{{pp.tecnologias}}</td>
-                    <td>{{pp.posicionamiento}}</td>
-                    <td>
-                      <a role="button" routerLink="/producto/{{pp.id_producto}}" class="btn btn-outline-success">
-                        <mat-icon>visibility</mat-icon>
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <br>
-            <li>
-              <strong>Tercero</strong>
-            </li>
-            <div class="w-100" *ngIf="!nullpt">
-              <p class="mx-auto lead">Sin productos registrados</p>
-            </div>
-            <div *ngIf="nullpt">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Áreas/Tecnologias</th>
-                    <th scope="col">Marca</th>
-                    <th scope="col">Nivel de partnership</th>
-                    <th scope="col">Ver</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let pt of p_tercero; let inx = index;">
-                    <th scope="row">{{inx+1}}</th>
-                    <td>{{pt.nombre}}</td>
-                    <td>{{tabString(pt.descripcion)}}</td>
-                    <td>{{pt.tecnologias}}</td>
-                    <td>{{pt.marca}}</td>
-                    <td>{{pt.partnership}}</td>
-                    <td>
-                      <a role="button" routerLink="/producto/{{pt.id_producto}}" class="btn btn-outline-success">
-                        <mat-icon>visibility</mat-icon>
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </ul>
-        </li>
-        <li class="list-group-item">
-          <ul>
-            <li>
-              <strong>Oferta valor de la organización</strong><a routerLink="/editar/empresa" routerLinkActive="active"><mat-icon>edit</mat-icon></a><br>
+          <div class="row">
+            <div class="col">
+              <strong>Oferta valor de la organización</strong><br>
               <p class="text-justify">
                 {{info_gnrl.descripcion_oferta_valor}}
               </p>
-            </li>
-            <br>
-            <li>
-              <strong>Sectores atendidos por la organización</strong><small>(Finanzas, Comercio, Industria, Servicios, Gobierno)</small><a routerLink="/editar/empresa" routerLinkActive="active"><mat-icon>edit</mat-icon></a>
-              <br>
-              <ul class="list-group list-group-horizontal-sm">
-                <li class="list-group-item" *ngFor="let sec of sectores_a">{{sec}}</li>
-              </ul>
-            </li>
-            <br>
-            <li>
-              <strong>5 Principales clientes</strong><a routerLink="/editar/empresa" routerLinkActive="active"><mat-icon>edit</mat-icon></a><br>
-              {{info_gnrl.principales_clientes}}
-            </li>
-            <br>
-            <li>
-              <strong>Organizaciones empresariales en las que participa</strong><br>
-              <ul class="list-group list-group-horizontal-sm">
-                <li class="list-group-item" *ngFor="let org of organizaciones">{{org}}</li>
-              </ul>
-            </li>
-            <br>
+            </div>
+            <div class="col">
+              <strong>5 Principales clientes</strong>
+              <p class="text-justify">
+                {{info_gnrl.principales_clientes}}
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="list-group-item">
+          <strong>Sectores atendidos por la organización</strong><small>(Finanzas, Comercio, Industria, Servicios, Gobierno)</small>
+          <ul class="list-group list-group-horizontal-sm">
+            <li class="list-group-item" *ngFor="let sec of sectores_a">{{sec}}</li>
           </ul>
         </li>
+
+        <li class="list-group-item">
+          <strong>Organizaciones empresariales en las que participa</strong>
+          <ul class="list-group list-group-horizontal-sm">
+            <li class="list-group-item" *ngFor="let org of organizaciones">{{org}}</li>
+          </ul>
+        </li>
+
       </ul>
     </div>
   </div>

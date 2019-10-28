@@ -40,8 +40,16 @@ import { CorreosService } from './services/correos.service';
 import { FooterComponent } from './footer/footer.component';
 import { EditarEmpresaComponent } from './editar/editar-empresa/editar-empresa.component';
 import { EditarDireccionComponent } from './editar/editar-direccion/editar-direccion.component';
+import { EditarEstatificacionComponent } from './editar/editar-estatificacion/editar-estatificacion.component';
 import { EliminarDireccionComponent } from './eliminar/eliminar-direccion/eliminar-direccion.component';
-
+import { EstratificacionComponent } from './ver/estratificacion/estratificacion.component';
+import { ColaboradoresComponent } from './ver/colaboradores/colaboradores.component';
+import { AgregarDireccionComponent } from './agregar/agregar-direccion/agregar-direccion.component';
+import { MAT_DATE_LOCALE } from '@angular/material';
+import { AgregarColaboradorComponent } from './agregar/agregar-colaborador/agregar-colaborador.component';
+import { EliminarColaboradorComponent } from './eliminar/eliminar-colaborador/eliminar-colaborador.component';
+import { EditarColaboradorComponent } from './editar/editar-colaborador/editar-colaborador.component';
+import { MicuentaComponent } from './micuenta/micuenta.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +69,15 @@ import { EliminarDireccionComponent } from './eliminar/eliminar-direccion/elimin
     FooterComponent,
     EditarEmpresaComponent,
     EditarDireccionComponent,
-    EliminarDireccionComponent
+    EliminarDireccionComponent,
+    EditarEstatificacionComponent,
+    EstratificacionComponent,
+    ColaboradoresComponent,
+    AgregarDireccionComponent,
+    AgregarColaboradorComponent,
+    EliminarColaboradorComponent,
+    EditarColaboradorComponent,
+    MicuentaComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +108,8 @@ import { EliminarDireccionComponent } from './eliminar/eliminar-direccion/elimin
     DireccionesService,
     EstatService,
     ProductosService,
-    CorreosService
+    CorreosService,
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
   ],
   bootstrap: [AppComponent]
 })

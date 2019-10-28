@@ -25,15 +25,15 @@ export class FormEmpresaComponent implements OnInit {
 
   ngOnInit() {
     this.empresaForm =  this.fb.group({
-      nombre : ['',[Validators.required,Validators.maxLength(150)]],
-      razon_social : ['',[Validators.required,Validators.maxLength(150)]],
-      rfc : ['',[Validators.required,Validators.minLength(12),Validators.maxLength(13)]],
+      nombre : ['',[Validators.required,Validators.maxLength(150),Validators.pattern(this.not_wss)]],
+      razon_social : ['',[Validators.required,Validators.maxLength(150),Validators.pattern(this.not_wss)]],
+      rfc : ['',[Validators.required,Validators.minLength(12),Validators.maxLength(13),Validators.pattern(/^([A-Z,Ñ,&]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{3})$/)]],
       fecha_creación : ['',[Validators.required]],
-      web : ['',[Validators.pattern(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/),Validators.maxLength(200)]],
-      linkedin : ['',[Validators.maxLength(100), Validators.pattern(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/)]],
-      facebook : ['',[Validators.maxLength(100), Validators.pattern(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/)]],
-      twitter : ['',[Validators.maxLength(100), Validators.pattern(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/)]],
-      instagram : ['',[Validators.maxLength(100), Validators.pattern(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/)]],
+      web : ['',[Validators.pattern(this.url_regex),Validators.maxLength(200)]],
+      linkedin : ['',[Validators.maxLength(100), Validators.pattern(this.url_regex)]],
+      facebook : ['',[Validators.maxLength(100), Validators.pattern(this.url_regex)]],
+      twitter : ['',[Validators.maxLength(100), Validators.pattern(this.url_regex)]],
+      instagram : ['',[Validators.maxLength(100), Validators.pattern(this.url_regex)]],
       descripcion_oferta_valor : ['',[Validators.required,Validators.maxLength(500)]],
       sectores_atendidos : ['',[Validators.required]],
       clientes_sectores : ['',[Validators.required]],
@@ -57,7 +57,8 @@ export class FormEmpresaComponent implements OnInit {
   saving:boolean=false;
   error:boolean=false;
   guardado: boolean = false;
-
+  url_regex = /^([a-z][a-z0-9\*\-\.]*):\/\/(?:(?:(?:[\w\.\-\+!$&'\(\)*\+,;=]|%[0-9a-f]{2})+:)*(?:[\w\.\-\+%!$&'\(\)*\+,;=]|%[0-9a-f]{2})+@)?(?:(?:[a-z0-9\-\.]|%[0-9a-f]{2})+|(?:\[(?:[0-9a-f]{0,4}:)*(?:[0-9a-f]{0,4})\]))(?::[0-9]+)?(?:[\/|\?](?:[\w#!:\.\?\+=&@!$'~*,;\/\(\)\[\]\-]|%[0-9a-f]{2})*)?$/;
+  not_wss = /^\S/;
 
   getSectoresA(){
     this.catalogosService.getSectoresAntendidos().subscribe(

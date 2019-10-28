@@ -5,42 +5,45 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
+    <div class="col-12"> 
       <form class="example-form" [formGroup]="empresaForm" (ngSubmit)="saveEmpresa()">
         <div class="row">
           <div class="col-lg-6 col-md-12 col-sm-12">
               <mat-form-field class="w-100">
-                <input matInput placeholder="Nombre Empresa" formControlName="nombre" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                <input matInput placeholder="Nombre Empresa" formControlName="nombre" required>
               </mat-form-field>
               <div *ngIf="empresaForm.get('nombre').errors&&empresaForm.get('nombre').dirty">
                 <p *ngIf="empresaForm.get('nombre').hasError('required')" class="text-danger">Este campo es requerido</p>
                 <p *ngIf="empresaForm.get('nombre').hasError('maxlength')" class="text-danger">Máximo 150 caracteres</p>
+                <p *ngIf="empresaForm.get('nombre').hasError('pattern')" class="text-danger">No puede comenzar con un espacio</p>
               </div>
           </div>
           <div class="col-lg-6 col-md-12 col-sm-12">
             <mat-form-field class="w-100">
-              <input matInput placeholder="Razón social" formControlName="razon_social">
+              <input matInput placeholder="Razón social" formControlName="razon_social" required>
             </mat-form-field>
             <div *ngIf="empresaForm.get('razon_social').errors&&empresaForm.get('razon_social').dirty">
               <p *ngIf="empresaForm.get('razon_social').hasError('required')" class="text-danger">Este campo es requerido</p>
               <p *ngIf="empresaForm.get('razon_social').hasError('maxlength')" class="text-danger">Máximo 150 caracteres</p>
+              <p *ngIf="empresaForm.get('razon_social').hasError('pattern')" class="text-danger">No puede comenzar con un espacio</p>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-6 col-md-12 col-sm-12">
               <mat-form-field class="w-100">
-                <input matInput placeholder="RFC" formControlName="rfc">
+                <input matInput placeholder="RFC" formControlName="rfc" required>
               </mat-form-field>
               <div *ngIf="empresaForm.get('rfc').errors&&empresaForm.get('rfc').dirty">
                 <p *ngIf="empresaForm.get('rfc').hasError('required')" class="text-danger">Este campo es requerido</p>
                 <p *ngIf="empresaForm.get('rfc').hasError('maxlength')" class="text-danger">Máximo 13 caracteres</p>
                 <p *ngIf="empresaForm.get('rfc').hasError('minlength')" class="text-danger">Mínimo 12 caracteres</p>
+                <p *ngIf="empresaForm.get('rfc').hasError('pattern')" class="text-danger">No coincide con el formato de un RFC</p>
               </div>
           </div>
           <div class="col-lg-6 col-md-12 col-sm-12">
             <mat-form-field class="w-100">
-              <input matInput [matDatepicker]="picker" placeholder="Fecha de creación" formControlName="fecha_creación">
+              <input matInput [matDatepicker]="picker" placeholder="Fecha de creación" formControlName="fecha_creación" required>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -113,10 +116,11 @@
         <div class="row">
           <div class="col-12">
             <mat-form-field class="w-100">
-              <textarea matInput placeholder="Describa brevemente (500 caracteres) la oferta de valor de su organización:" formControlName="descripcion_oferta_valor"></textarea>
+              <textarea matInput placeholder="Describa brevemente (500 caracteres) la oferta de valor de su organización:" formControlName="descripcion_oferta_valor" rows="5" required></textarea>
             </mat-form-field>
             <div *ngIf="empresaForm.get('descripcion_oferta_valor').errors&&empresaForm.get('descripcion_oferta_valor').dirty">
               <p *ngIf="empresaForm.get('descripcion_oferta_valor').hasError('maxlength')" class="text-danger">Máximo 500 caracteres</p>
+              <p *ngIf="empresaForm.get('descripcion_oferta_valor').hasError('required')" class="text-danger">Campo requerido</p>
             </div>
           </div>
         </div>
@@ -124,7 +128,7 @@
           <div class="col-12">
             <mat-form-field class="w-100">
               <mat-label>Sectores atendidos por su organización</mat-label>
-              <mat-select multiple formControlName="sectores_atendidos">
+              <mat-select multiple formControlName="sectores_atendidos" required>
                 <mat-option *ngFor="let sector of sectoresA" [value]="sector.nombre_sector">{{sector.nombre_sector}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -136,7 +140,7 @@
         <div class="row">
           <div class="col-12">
             <mat-form-field class="w-100">
-              <textarea matInput placeholder="Menciona los 5 Principales clientes de su empresa" formControlName="clientes_sectores"></textarea>
+              <textarea matInput placeholder="Menciona los 5 Principales clientes de su empresa separados por coma" formControlName="clientes_sectores" required></textarea>
             </mat-form-field>
             <div *ngIf="empresaForm.get('clientes_sectores').errors&&empresaForm.get('clientes_sectores').dirty">
               <p *ngIf="empresaForm.get('clientes_sectores').hasError('required')" class="text-danger">Este campo es requerido</p>
@@ -160,14 +164,14 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <h1 class="lead">Cobertura</h1>
+            <h1 class="lead">Alcance territorial de la oferta de tus servicios.</h1>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12 m-auto">
             <mat-form-field class="w-100">
               <mat-label>Nacional (Seleccione qué estados de México)</mat-label>
-              <mat-select multiple formControlName="c_nacional">
+              <mat-select multiple formControlName="c_nacional" required>
                 <mat-option value="Toda la república(México)">Toda la república(México)</mat-option>
                 <mat-option *ngFor="let estado of estados" [value]="estado.nombre_estado">{{estado.nombre_estado}}</mat-option>
               </mat-select>
@@ -179,7 +183,7 @@
           <div class="col-lg-6 col-md-6 col-sm-12 m-auto">
             <mat-form-field class="w-100">
               <mat-label>Internacional (Seleccione qué paises)</mat-label>
-              <mat-select multiple formControlName="c_internacional">
+              <mat-select multiple formControlName="c_internacional" required>
                 <mat-option *ngFor="let pais of paises" [value]="pais.nombre_pais">{{pais.nombre_pais}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -201,7 +205,6 @@
           </div>
         </div>
       </form>
-
     </div>
   </div>
 
@@ -215,5 +218,9 @@
       <button class="btn btn-success" (click)="finalizar()">Siguiente</button>
     </div>
   </div>
-
+  <div class="row">
+    <div class="col">
+      <small class="text-danger">* Campos requeridos</small>
+    </div>
+  </div>
 </div>

@@ -1,13 +1,21 @@
 <app-navbar></app-navbar>
 <hr>
-<hr>
+<hr> 
 
 <div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="!cargando">
   <div class="row">
-    <div class="col">
-      <h1 class="display-4"><a role="button" class="btn btn-outline-primary" (click)="return()"><mat-icon>keyboard_arrow_left</mat-icon></a>Actualización de datos</h1>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">
+      <a role="button" class="btn btn-outline-primary display-2" (click)="return()" data-toggle="tooltip" data-placement="top" title="Regresar">
+        <mat-icon>arrow_back</mat-icon>
+      </a> 
     </div>
   </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h1 class="display-4 inline-icon">Actualización de datos</h1>
+    </div>
+  </div>
+
   <hr>
   <div class="row">
     <div class="col-12">
@@ -19,6 +27,7 @@
               </mat-form-field>
               <div *ngIf="empresaForm.get('nombre').errors&&empresaForm.get('nombre').dirty">
                 <p *ngIf="empresaForm.get('nombre').hasError('required')" class="text-danger">Este campo es requerido</p>
+                <p *ngIf="empresaForm.get('nombre').hasError('pattern')" class="text-danger">No puede comenzar con un espacio</p>
                 <p *ngIf="empresaForm.get('nombre').hasError('maxlength')" class="text-danger">Máximo 150 caracteres</p>
               </div>
           </div>
@@ -28,6 +37,7 @@
             </mat-form-field>
             <div *ngIf="empresaForm.get('razon_social').errors&&empresaForm.get('razon_social').dirty">
               <p *ngIf="empresaForm.get('razon_social').hasError('required')" class="text-danger">Este campo es requerido</p>
+              <p *ngIf="empresaForm.get('razon_social').hasError('pattern')" class="text-danger">No puede comenzar con un espacio</p>
               <p *ngIf="empresaForm.get('razon_social').hasError('maxlength')" class="text-danger">Máximo 150 caracteres</p>
             </div>
           </div>
@@ -40,6 +50,7 @@
               <div *ngIf="empresaForm.get('rfc').errors&&empresaForm.get('rfc').dirty">
                 <p *ngIf="empresaForm.get('rfc').hasError('required')" class="text-danger">Este campo es requerido</p>
                 <p *ngIf="empresaForm.get('rfc').hasError('maxlength')" class="text-danger">Máximo 13 caracteres</p>
+                <p *ngIf="empresaForm.get('rfc').hasError('pattern')" class="text-danger">No coincide con el formato de un RFC</p>
                 <p *ngIf="empresaForm.get('rfc').hasError('minlength')" class="text-danger">Mínimo 12 caracteres</p>
               </div>
           </div>
@@ -118,7 +129,7 @@
         <div class="row">
           <div class="col-12">
             <mat-form-field class="w-100">
-              <textarea matInput placeholder="Describa brevemente (500 caracteres) la oferta de valor de su organización:" formControlName="descripcion_oferta_valor"></textarea>
+              <textarea matInput placeholder="Describa brevemente (500 caracteres) la oferta de valor de su organización:" formControlName="descripcion_oferta_valor"  rows="5"></textarea>
             </mat-form-field>
             <div *ngIf="empresaForm.get('descripcion_oferta_valor').errors&&empresaForm.get('descripcion_oferta_valor').dirty">
               <p *ngIf="empresaForm.get('descripcion_oferta_valor').hasError('maxlength')" class="text-danger">Máximo 500 caracteres</p>
@@ -127,9 +138,6 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <div class="">
-              Sectores atendidos actualmente: {{sect}}
-            </div>
             <mat-form-field class="w-100">
               <mat-label>Sectores atendidos por su organización <small>Si desea modificarlos, seleccione en la sección siguiente</small></mat-label>
               <mat-select multiple formControlName="sectores_atendidos">
@@ -144,13 +152,55 @@
         <div class="row">
           <div class="col-12">
             <mat-form-field class="w-100">
-              <textarea matInput placeholder="Menciona los 5 Principales clientes de su empresa" formControlName="clientes_sectores"></textarea>
+              <textarea matInput placeholder="Menciona los 5 Principales clientes de su empresa separados por coma" formControlName="clientes_sectores"></textarea>
             </mat-form-field>
             <div *ngIf="empresaForm.get('clientes_sectores').errors&&empresaForm.get('clientes_sectores').dirty">
               <p *ngIf="empresaForm.get('clientes_sectores').hasError('required')" class="text-danger">Este campo es requerido</p>
             </div>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field class="w-100">
+              <mat-label>Organizaciónes empresariales en las que participa y/o está afiliado</mat-label>
+              <mat-select multiple formControlName="orgs_afiliado">
+                <mat-option *ngFor="let org of organizacionesEmp" [value]="org.id_cat_oe">{{org.nombre_orgemp}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h1 class="lead">Alcance territorial de la oferta de tus servicios.</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12 m-auto">
+            <mat-form-field class="w-100">
+              <mat-label>Nacional (Seleccione qué estados de México)</mat-label>
+              <mat-select multiple formControlName="c_nacional">
+                <mat-option value="Toda la república(México)">Toda la república(México)</mat-option>
+                <mat-option *ngFor="let estado of estados" [value]="estado.nombre_estado">{{estado.nombre_estado}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="empresaForm.get('c_nacional').errors&&empresaForm.get('c_nacional').dirty">
+              <p *ngIf="empresaForm.get('c_nacional').hasError('required')" class="text-danger">Este campo es requerido</p>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 m-auto">
+            <mat-form-field class="w-100">
+              <mat-label>Internacional (Seleccione qué paises)</mat-label>
+              <mat-select multiple formControlName="c_internacional">
+                <mat-option *ngFor="let pais of paises" [value]="pais.nombre_pais">{{pais.nombre_pais}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="empresaForm.get('c_internacional').errors&&empresaForm.get('c_internacional').dirty">
+              <p *ngIf="empresaForm.get('c_internacional').hasError('required')" class="text-danger">Este campo es requerido</p>
+            </div>
+          </div>
+        </div> 
+
         <div class="row">
           <div class="col-12 text-right">
             <button type="submit" class="btn btn-success" style="margin-left: 10px; width: 100px;" [disabled]="empresaForm.invalid">Actualizar</button>
@@ -163,7 +213,6 @@
           </div>
         </div>
       </form>
-
     </div>
   </div>
 </div>

@@ -1,0 +1,121 @@
+<app-navbar></app-navbar>
+<hr>
+<hr>
+
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="!cargando">
+
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">
+      <a role="button" class="btn btn-outline-primary display-2" (click)="return()" data-toggle="tooltip" data-placement="top" title="Regresar">
+        <mat-icon>arrow_back</mat-icon>
+      </a> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h1 class="display-4 inline-icon">Registro de colaborador</h1>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="lead">
+              Favor de llenar todos los campos requeridos, el usuario y contraseña se generarán automaticamente y se le harán llegar mediante email a tu colaborador.
+            </h1>
+          </div>        
+        </div>
+
+        <div class="row">
+          <div class="col">
+              <form [formGroup]="newUserForm" (ngSubmit)="registrar()">
+                <div class="row">
+
+                  <div class="col">
+                    <mat-form-field class="w-100">
+                      <input matInput placeholder="Nombre(s)" formControlName="nombres" required>
+                    </mat-form-field>
+                    <div *ngIf="newUserForm.get('nombres').errors&&newUserForm.get('nombres').dirty">
+                      <p *ngIf="newUserForm.get('nombres').hasError('required')" class="text-danger">El o los nombres son requeridos</p>
+                      <p *ngIf="newUserForm.get('nombres').hasError('maxlength')" class="text-danger">Máximo 50 caracteres</p>            
+                      <p *ngIf="newUserForm.get('nombres').hasError('pattern')" class="text-danger">No puede comenzar con espacio</p>            
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <mat-form-field class="w-100">
+                      <input matInput placeholder="Apellido(s)" formControlName="apellidos" required>
+                    </mat-form-field>
+                    <div *ngIf="newUserForm.get('apellidos').errors&&newUserForm.get('apellidos').dirty">
+                      <p *ngIf="newUserForm.get('apellidos').hasError('required')" class="text-danger">El o los apellidos son requeridos</p>
+                      <p *ngIf="newUserForm.get('apellidos').hasError('maxlength')" class="text-danger">Máximo 50 caracteres</p>            
+                      <p *ngIf="newUserForm.get('apellidos').hasError('pattern')" class="text-danger">No puede comenzar con espacio</p>            
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field class="w-100">
+                      <mat-label>Puesto</mat-label>
+                      <mat-select formControlName="fk_id_puesto" required>
+                        <mat-option *ngFor="let puesto of puestos" [value]="puesto.id_puesto">
+                          {{puesto.nombre_puesto}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field> 
+                    <div *ngIf="newUserForm.get('fk_id_puesto').errors&&newUserForm.get('fk_id_puesto').dirty">
+                      <p *ngIf="newUserForm.get('fk_id_puesto').hasError('required')" class="text-danger">El puesto es requerido</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field class="w-100">
+                      <input type="text" matInput placeholder="Télefono (Utilice de 10 a 20 caracteres númericos)" formControlName="telefono" required>
+                    </mat-form-field>
+                    <div *ngIf="newUserForm.get('telefono').errors&&newUserForm.get('telefono').dirty">
+                      <p *ngIf="newUserForm.get('telefono').hasError('required')" class="text-danger">El télefono es requerido</p>
+                      <p *ngIf="newUserForm.get('telefono').hasError('pattern')" class="text-danger">Digite un télefono válido</p>
+                      <p *ngIf="newUserForm.get('telefono').hasError('minlength')" class="text-danger">Mínimo 10 caracteres</p>                        
+                      <p *ngIf="newUserForm.get('telefono').hasError('maxlength')" class="text-danger">Máximo 20 caracteres</p>            
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field class="w-100">
+                      <input type="email" matInput placeholder="Correo de contacto" formControlName="email" required>
+                    </mat-form-field>
+                    <div *ngIf="newUserForm.get('email').errors&&newUserForm.get('email').dirty">
+                      <p *ngIf="newUserForm.get('email').hasError('required')" class="text-danger">El correo es requerido</p>
+                      <p *ngIf="newUserForm.get('email').hasError('maxlength')" class="text-danger">Máximo 30 caracteres</p>            
+                      <p *ngIf="newUserForm.get('email').hasError('email')" class="text-danger">Digite un correo válido</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="offset-lg-6 col-lg-6 col-md-12 col-sm-12 text-right">
+                    <button type="submit" class="btn btn-primary m-auto" [disabled]="newUserForm.invalid">Registrar</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <mat-spinner class="mx-auto" *ngIf="prs"></mat-spinner>
+                  </div>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<hr>
+<br>
+<app-footer></app-footer>

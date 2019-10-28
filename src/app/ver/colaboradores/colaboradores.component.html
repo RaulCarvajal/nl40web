@@ -1,0 +1,89 @@
+<app-navbar></app-navbar>
+<hr>
+<hr>
+
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="!cargando">
+
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">
+      <a role="button" class="btn btn-outline-primary display-2" (click)="return()" data-toggle="tooltip" data-placement="top" title="Regresar">
+        <mat-icon>arrow_back</mat-icon>
+      </a> 
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+      <a class="display-2 btn btn-outline-primary" (click)="routerTo('/agregar/colaborador')" data-toggle="tooltip" data-placement="top" title="Añadir colaborador">
+        <mat-icon>add_box</mat-icon>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h1 class="display-4 inline-icon">Mis colaboradores</h1>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <ul class="list-group">
+
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col">
+              <table class="table" *ngIf="!sin_colab">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let colaborador of colaboradores; let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{colaborador.nombres }} {{colaborador.apellidos}}</td>
+                    <td>{{colaborador.email}}</td>
+                    <td>{{colaborador.telefono}}</td>
+                    <td class="text-right">
+                        <div class="btn-group btn-group-sm" role="group">
+                          <a role="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Editar esta dirección" routerLink='/editar/colaborador/{{colaborador.id_contacto}}' routerLinkActive='active'>
+                            <mat-icon>edit</mat-icon>
+                          </a>
+                          <a role="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Eliminar esta dirección" routerLink='/eliminar/colaborador/{{colaborador.id_contacto}}' routerLinkActive='active'>
+                            <mat-icon>delete_forever</mat-icon>
+                          </a>
+                        </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="text-center" *ngIf="sin_colab">
+                <p class="lead">Sin colaboradores registrados</p>
+              </div>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>
+<br><br>
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="cargando">
+  <div class="row">
+    <div class="col">
+        <h1 class="lead">
+          Cargando datos . . .
+        </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <mat-spinner class="mx-auto"></mat-spinner>
+    </div>
+  </div>
+</div>
+<hr>
+<br>
+<app-footer></app-footer>

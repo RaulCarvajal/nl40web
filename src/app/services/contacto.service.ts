@@ -19,4 +19,24 @@ export class ContactoService {
     return this.http.post<any>(`http://${uri_port.url}:${uri_port.port}/api/contactos`,data)
   }
 
+  getColaboradores(id:number){
+    return this.http.get<contacto[]>(`http://${uri_port.url}:${uri_port.port}/api/colaboradores/${id}`)
+  }
+
+  saveColaborador(data:number){
+    return this.http.post<any>(`http://${uri_port.url}:${uri_port.port}/api/colaboradores`,data)
+  }
+
+  delColaborador(id:number){
+    return this.http.delete<any>(`http://${uri_port.url}:${uri_port.port}/api/colaboradores/${id}`)
+  }
+
+  updtColaborador(data:number){
+    return this.http.put<any>(`http://${uri_port.url}:${uri_port.port}/api/colaboradores`,data)
+  }
+
+  getContacto(id:number){
+    return this.http.get<contacto>(`http://${uri_port.url}:${uri_port.port}/api/contactos/${id}`)
+  }
+
 }
