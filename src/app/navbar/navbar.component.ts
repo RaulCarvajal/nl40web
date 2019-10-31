@@ -16,9 +16,11 @@ export class NavbarComponent implements OnInit {
   
   nombre: string = " ";
   tipo_user: string = " ";
+  admin: boolean = true;
   
   ngOnInit() {
     this.getStrings();
+    this.isAdmin();
   }
 
 
@@ -32,4 +34,9 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('landing');
   }
 
+  isAdmin(){
+    if(this.session.getTipoUsuario() == "colaborador"){
+      this.admin = false;
+    }
+  }
 }

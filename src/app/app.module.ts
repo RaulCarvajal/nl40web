@@ -50,6 +50,7 @@ import { AgregarColaboradorComponent } from './agregar/agregar-colaborador/agreg
 import { EliminarColaboradorComponent } from './eliminar/eliminar-colaborador/eliminar-colaborador.component';
 import { EditarColaboradorComponent } from './editar/editar-colaborador/editar-colaborador.component';
 import { MicuentaComponent } from './micuenta/micuenta.component';
+import { EditarMicuentaComponent } from './editar/editar-micuenta/editar-micuenta.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { MicuentaComponent } from './micuenta/micuenta.component';
     AgregarColaboradorComponent,
     EliminarColaboradorComponent,
     EditarColaboradorComponent,
-    MicuentaComponent
+    MicuentaComponent,
+    EditarMicuentaComponent
   ],
   imports: [
     BrowserModule,

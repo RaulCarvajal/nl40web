@@ -18,7 +18,7 @@
         <li class="nav-item">
           <a class="nav-link text-dark" routerLink="/estratificacion" routerLinkActive="active">Estratificación</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="admin">
           <a class="nav-link text-dark" routerLink="/colaboradores" routerLinkActive="active">Mis colaboradores</a>
         </li>
       </ul>
@@ -29,7 +29,7 @@
               </a>
               <div class="dropdown-menu mr-auto" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item disabled" [routerLink]="colaboradores">{{nombre}}({{tipo_user}})</a>
-                <a class="dropdown-item" [routerLink]="colaboradores">Mi cuenta</a>
+                <a class="dropdown-item" routerLink="/micuenta">Mi cuenta</a>
                 <a class="dropdown-item text-danger" (click)="closeSession()" >Cerrar sesión</a>
               </div>
             </li>

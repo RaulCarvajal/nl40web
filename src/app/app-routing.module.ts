@@ -17,12 +17,15 @@ import { AgregarDireccionComponent } from './agregar/agregar-direccion/agregar-d
 import { AgregarColaboradorComponent } from './agregar/agregar-colaborador/agregar-colaborador.component';
 import { EliminarColaboradorComponent } from './eliminar/eliminar-colaborador/eliminar-colaborador.component';
 import { EditarColaboradorComponent } from './editar/editar-colaborador/editar-colaborador.component';
+import { MicuentaComponent } from './micuenta/micuenta.component';
+import { EditarMicuentaComponent } from './editar/editar-micuenta/editar-micuenta.component';
 
 const routes: Routes = [
   {path : 'registro', component : RegistroComponent},
   {path : 'landing', component : LandingComponent},
   {path : 'inicio', component : InicioComponent},
   {path : 'empresa', component : MiempresaComponent},
+  {path : 'micuenta', component : MicuentaComponent},
   {path : 'producto/:id', component : ProductoComponent},
   {path : 'productos', component : ConstruccionComponent},
   {path : 'estratificacion', component : EstratificacionComponent},
@@ -31,6 +34,7 @@ const routes: Routes = [
   {path : 'editar/empresa', component : EditarEmpresaComponent},
   {path : 'editar/estratificacion', component : EditarEstatificacionComponent},
   {path : 'editar/colaborador/:id', component : EditarColaboradorComponent},
+  {path : 'editar/micuenta', component : EditarMicuentaComponent},
   {path : 'eliminar/empresa', component : EditarEmpresaComponent},
   {path : 'eliminar/direccion/:id', component : EliminarDireccionComponent},
   {path : 'eliminar/colaborador/:id', component : EliminarColaboradorComponent},

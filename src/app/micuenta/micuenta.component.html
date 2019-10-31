@@ -1,3 +1,138 @@
-<p>
-  micuenta works!
-</p>
+<app-navbar></app-navbar>
+<hr>
+<hr>
+
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="!cargando">
+
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">
+      <a role="button" class="btn btn-outline-primary display-2" (click)="return()" data-toggle="tooltip" data-placement="top" title="Regresar">
+        <mat-icon>arrow_back</mat-icon>
+      </a> 
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+      <!--<a class="display-2 btn btn-outline-primary" (click)="routerTo('/editar/micuent')" data-toggle="tooltip" data-placement="top" title="Editar">
+        <mat-icon>edit</mat-icon>
+      </a>-->
+      <a class="display-2 btn btn-outline-primary" role="button" data-toggle="modal" data-target="#exampleModal">
+        <mat-icon>edit</mat-icon>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h1 class="display-4 inline-icon">Mi cuenta</h1>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <ul class="list-group list-goup-sm">
+        <li class="list-group-item">
+          <p class="lead">Datos corporativos</p>
+          <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <strong>Empresa:</strong>
+              <br>
+              <p>{{empresa.nombre}}</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <strong>Registrado como (Rol en el sistema): </strong>
+              <br>
+              <p>{{colaborador.tipo_usuario}}</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <strong>Puesto: </strong>
+              <br>
+              <p>{{puesto}}</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="list-group-item">
+          <p class="lead">Datos personales</p>
+          <div class="row">
+            <div class="col">
+              <strong>Nombre:</strong>
+              <br>
+              <p>{{colaborador.nombres}} {{colaborador.apellidos}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <strong>Correo:</strong>
+              <br>
+              <p>{{colaborador.email}}</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <strong>Teléfono: </strong>
+              <br>
+              <p>{{colaborador.telefono}}</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="list-group-item">
+          <p class="lead">Datos de sesión</p>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <strong>Nombre de usuario:</strong>
+              <br>
+              <p>{{colaborador.nombre_usuario}}</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <strong>Contraseña: </strong>
+              <br>
+              <p>{{pass}}</p>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="cargando">
+  <div class="row">
+    <div class="col">
+        <h1 class="lead">
+          Cargando datos . . .
+        </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <mat-spinner class="mx-auto"></mat-spinner>
+    </div>
+  </div>
+</div>
+<br>
+<hr>
+<br>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Contraseña</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Digite su contraseña para editar" type="password" [(ngModel)]="psw2" (keyup)="compararPasswords()">
+        </mat-form-field>
+        <div class="text-right">
+          <button type="button" id="close-modal" class="btn btn-secondary" data-dismiss="modal" style="display: none">Cerrar</button>
+          <button class="btn btn-success mr-auto" [disabled]="btndis" (click)="entrar()">Entrar</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
