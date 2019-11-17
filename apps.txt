@@ -7,3 +7,10 @@ inc mty
 
 contraseña internet
 F0AF85E82B14 
+
+
+contraseña server e ip
+El acceso es vía escritorio remoto desde cualquier sistema Windows:
+Ip:         18.218.209.146 ---> 18.189.206.61
+Usr:       Administrator
+Pass:     GafBB7q(FFvBxOgIk2cVPv&VMRyAmQGR
