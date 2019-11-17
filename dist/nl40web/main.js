@@ -3704,8 +3704,8 @@ var CatalogosService = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uri_port", function() { return uri_port; });
 var uri_port = {
-    url: "localhost",
-    port: "57042"
+    url: "18.189.206.61",
+    port: "8080"
 };
 
 
