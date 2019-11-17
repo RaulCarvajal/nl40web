@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import { CatalogosService } from 'src/app/services/catalogos.service';
 import { SessionService } from 'src/app/services/session.service';
-import { ProductosService } from 'src/app/services/productos.service';
 import { Router } from '@angular/router';
+import { ProductosService } from 'src/app/services/productos.service';
+import { Location } from '@angular/common';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { CatalogosService } from 'src/app/services/catalogos.service';
 
 @Component({
-  selector: 'app-form-productos',
-  templateUrl: './form-productos.component.html',
-  styleUrls: ['./form-productos.component.css']
+  selector: 'app-agregar-producto',
+  templateUrl: './agregar-producto.component.html',
+  styleUrls: ['./agregar-producto.component.css']
 })
-export class FormProductosComponent implements OnInit {
+export class AgregarProductoComponent implements OnInit {
 
   constructor(
-    private fb: FormBuilder,
-    private cats: CatalogosService,
     private session: SessionService,
+    private router: Router,
+    private location: Location,
     private prods: ProductosService,
-    private router: Router
+    private fb: FormBuilder,
+    private cats: CatalogosService
   ) { }
 
-  formProducto: FormGroup;
-    
   tipos:any[];
   tecnologias:any[];
   niveles:any[];
@@ -30,6 +30,7 @@ export class FormProductosComponent implements OnInit {
   il:any[] = new Array(4);
   productos: any[];
 
+  cargando:boolean = false;
   saving:boolean=false;
   error:boolean=false;
   ocultar: boolean = false;
@@ -39,6 +40,8 @@ export class FormProductosComponent implements OnInit {
   sc: boolean = true;
   tiene_prods:boolean = false;
   not_wss = /^\S/;
+
+  formProducto: FormGroup;
 
   ngOnInit() {
     this.formProducto = this.fb.group({
@@ -63,7 +66,6 @@ export class FormProductosComponent implements OnInit {
 
 
     this.getCats();
-    this.getProdBasicos();
   }
 
   getCats(){
@@ -127,17 +129,6 @@ export class FormProductosComponent implements OnInit {
     }
   }
 
-  getIL(pid: number, index: number){
-    this.cats.getIndustryLevers(this.formProducto.value.val_ind[index].value_driver).subscribe(
-      res => {
-        this.il[pid] = res;
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
-
   save(){
     let temp = this.formProducto.value;
     temp.empresa_id = this.session.getEmpresaId(),
@@ -150,8 +141,7 @@ export class FormProductosComponent implements OnInit {
         this.saving = false;
         this.formProducto.disable();
         this.guardado = true;
-        document.getElementById('reset').click();
-        this.getProdBasicos();
+        this.return();
       },
       err => {
         this.error=true;
@@ -196,15 +186,15 @@ export class FormProductosComponent implements OnInit {
     }
   }
 
-  getProdBasicos(){
-    this.prods.getBasico(this.session.getEmpresaId()).subscribe(
-      res =>{
-        if(res.length>0){
-          this.productos = res
-          this.tiene_prods = true;
-        }else{
-          this.tiene_prods = false;
-        }
+  routerTo(r : string)
+  {
+    this.router.navigateByUrl(r);
+  }
+
+  getIL(pid: number, index: number){
+    this.cats.getIndustryLevers(this.formProducto.value.val_ind[index].value_driver).subscribe(
+      res => {
+        this.il[pid] = res;
       },
       err => {
         console.log(err);
@@ -212,17 +202,8 @@ export class FormProductosComponent implements OnInit {
     );
   }
 
-  saltarProductos(){
-    this.saving = true;
-    this.prods.saltarProductos(this.session.getContactoId()).subscribe(
-      res => {
-        this.session.updateSession();
-        this.saving = false;
-        this.router.navigateByUrl('landing');
-      },
-      err => {
-        console.log(err);
-      }
-    );
+  return(){
+    this.location.back();
   }
+
 }

@@ -26,8 +26,18 @@
             <li *ngFor="let tec of tecnologias">{{tec}}</li>
           </ul>
         </li>
+        <!--
         <li class="list-group-item"><strong>Value driver: </strong>{{producto.value_driver}} </li>
         <li class="list-group-item"><strong>Industry Lever: </strong>{{producto.industry_lever}} </li>
+        -->
+        <li class="list-group-item">
+          <strong>Value drivers e industry levers</strong>
+          <ul>
+            <li *ngFor="let item of val_ind"> 
+              {{item.value_driver}}<br>{{item.industry_levers}}
+            </li>
+          </ul>
+        </li>
         <li class="list-group-item"><strong>Caso de éxito: </strong>{{producto.caso_exito}} </li>
         <li class="list-group-item"><strong>Referencia: </strong>{{producto.referencia}} </li>
       </ul>

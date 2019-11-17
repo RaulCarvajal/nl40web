@@ -1,0 +1,154 @@
+<app-navbar></app-navbar>
+<hr>
+<hr>
+
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="!cargando">
+
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">
+      <a role="button" class="btn btn-outline-primary display-2" (click)="return()" data-toggle="tooltip" data-placement="top" title="Regresar">
+        <mat-icon>arrow_back</mat-icon>
+      </a> 
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+      <a role="button" class="btn btn-outline-primary display-2" (click)="routerTo('agregar/producto')" data-toggle="tooltip" data-placement="top" title="Agregar">
+        <mat-icon>add</mat-icon>
+      </a> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h1 class="display-4 inline-icon">Mis productos</h1>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <div>
+        <tabset>
+          <tab heading="Todos">
+            <br>
+            <table class="table" *ngIf="tiene_prods">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre producto</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Origen</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of productos; let inx = index;">
+                  <th scope="row">{{inx+1}}</th>
+                  <td>{{p.nombre}}</td>
+                  <td class="text-left">{{p.descripcion}}</td>
+                  <td class="text-left">{{p.origen}}</td>
+                  <td class="text-right">
+                      <div class="btn-group btn-group-sm" role="group">
+                        <a role="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Editar este producto" routerLink='/producto/{{p.id_producto}}' routerLinkActive='active'>
+                          <mat-icon>remove_red_eye</mat-icon>
+                        </a>
+                        <a role="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Eliminar este productos" routerLink='/eliminar/producto/{{p.id_producto}}' routerLinkActive='active'>
+                          <mat-icon>delete_forever</mat-icon>
+                        </a>
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="row" *ngIf="!tiene_prods">
+              <div class="col text-center">
+                <p class="lead">Sin productos registrados</p>
+              </div>
+            </div>
+          </tab>
+          <tab heading="Propios">
+            <br>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre producto</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Posicionamiento</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of pp; let inx = index;">
+                  <th scope="row">{{inx+1}}</th>
+                  <td>{{p.nombre}}</td>
+                  <td class="text-left">{{p.descripcion}}</td>
+                  <td class="text-left">{{p.posicionamiento}}</td>
+                  <td class="text-right">
+                      <div class="btn-group btn-group-sm" role="group">
+                        <a role="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Ver este producto" routerLink='/producto/{{p.id_producto}}' routerLinkActive='active'>
+                          <mat-icon>remove_red_eye</mat-icon>
+                        </a>
+                        <a role="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Eliminar este productos" routerLink='/eliminar/producto/{{p.id_producto}}' routerLinkActive='active'>
+                          <mat-icon>delete_forever</mat-icon>
+                        </a>
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </tab>
+          <tab heading="Terceros">
+            <br> 
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre producto</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Marca</th>
+                  <th scope="col">Partnership</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of pt; let inx = index;">
+                  <th scope="row">{{inx+1}}</th>
+                  <td>{{p.nombre}}</td>
+                  <td class="text-left">{{p.descripcion}}</td>
+                  <td class="text-left">{{p.marca}}</td>
+                  <td class="text-left">{{p.partnership}}</td>
+                  <td class="text-right">
+                      <div class="btn-group btn-group-sm" role="group">
+                        <a role="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Editar este producto" routerLink='/producto/{{p.id_producto}}' routerLinkActive='active'>
+                          <mat-icon>remove_red_eye</mat-icon>
+                        </a>
+                        <a role="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Eliminar este productos" routerLink='/eliminar/producto/{{p.id_producto}}' routerLinkActive='active'>
+                          <mat-icon>delete_forever</mat-icon>
+                        </a>
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="cargando">
+  <div class="row">
+    <div class="col">
+        <h1 class="lead">
+          Cargando datos . . .
+        </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <mat-spinner class="mx-auto"></mat-spinner>
+    </div>
+  </div>
+</div>
+<hr>
+<br>
+<app-footer></app-footer>

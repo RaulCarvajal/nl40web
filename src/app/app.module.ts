@@ -51,6 +51,10 @@ import { EliminarColaboradorComponent } from './eliminar/eliminar-colaborador/el
 import { EditarColaboradorComponent } from './editar/editar-colaborador/editar-colaborador.component';
 import { MicuentaComponent } from './micuenta/micuenta.component';
 import { EditarMicuentaComponent } from './editar/editar-micuenta/editar-micuenta.component';
+import { ProductosComponent } from './ver/productos/productos.component';
+import { EditarProductoComponent } from './editar/editar-producto/editar-producto.component';
+import { EliminarProductoComponent } from './eliminar/eliminar-producto/eliminar-producto.component';
+import { AgregarProductoComponent } from './agregar/agregar-producto/agregar-producto.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +83,11 @@ import { EditarMicuentaComponent } from './editar/editar-micuenta/editar-micuent
     EliminarColaboradorComponent,
     EditarColaboradorComponent,
     MicuentaComponent,
-    EditarMicuentaComponent
+    EditarMicuentaComponent,
+    ProductosComponent,
+    EditarProductoComponent,
+    EliminarProductoComponent,
+    AgregarProductoComponent
   ],
   imports: [
     BrowserModule,

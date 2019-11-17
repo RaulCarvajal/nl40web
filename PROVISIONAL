@@ -75,3 +75,21 @@
             </div>
           </ul>
         </li>
+
+
+        public class reqProd
+    {
+        public int contacto_id { get; set; }
+        public string descripcion_producto { get; set; }
+        public int empresa_id { get; set; }
+        public string marca { get; set; }
+        public string nivel_partnership { get; set; }
+        public string nombre_producto { get; set; }
+        public int posicionamiento { get; set; }
+        public int[] tecnologias { get; set; }
+        public int tipo { get; set; }
+        public int value_driver { get; set; }
+        public int industry_lever { get; set; }
+        public string caso_exito { get; set; }
+        public string referencia { get; set; }
+    }
