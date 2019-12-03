@@ -8,6 +8,7 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 import { empresa_table } from 'src/app/interfaces/empresa_get.interface';
 import { estado } from 'src/app/interfaces/estados.interface';
 import { pais } from 'src/app/interfaces/paises.interface';
+import { Select2OptionData } from 'ng-select2';
 
 @Component({
   selector: 'app-editar-empresa',
@@ -45,8 +46,10 @@ export class EditarEmpresaComponent implements OnInit {
   esta: string[] = [];
   pais: string[] = [];
 
-  url_regex = /^([a-z][a-z0-9\*\-\.]*):\/\/(?:(?:(?:[\w\.\-\+!$&'\(\)*\+,;=]|%[0-9a-f]{2})+:)*(?:[\w\.\-\+%!$&'\(\)*\+,;=]|%[0-9a-f]{2})+@)?(?:(?:[a-z0-9\-\.]|%[0-9a-f]{2})+|(?:\[(?:[0-9a-f]{0,4}:)*(?:[0-9a-f]{0,4})\]))(?::[0-9]+)?(?:[\/|\?](?:[\w#!:\.\?\+=&@!$'~*,;\/\(\)\[\]\-]|%[0-9a-f]{2})*)?$/;
+  url_regex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
   not_wss = /^\S/;
+
+  public estas2: Array<Select2OptionData>;
 
   initForm(){
     this.empresaForm =  this.fb.group({
@@ -109,6 +112,7 @@ export class EditarEmpresaComponent implements OnInit {
     this.catalogosService.getEstadosMex().subscribe(
       res => {
         this.estados =  res;
+        this.getEstadS2();
       }, err => {
         console.log(err);
       }
@@ -156,4 +160,9 @@ export class EditarEmpresaComponent implements OnInit {
     );
   }
 
+  getEstadS2(){
+    this.estados.forEach( e => {
+      this.estas2.push({id: e.nombre_estado, text: e.nombre_estado});
+    })
+  }
 }

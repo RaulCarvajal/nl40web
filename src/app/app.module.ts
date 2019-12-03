@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http'; 
+import { NgSelect2Module } from 'ng-select2';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -107,7 +108,8 @@ import { AgregarProductoComponent } from './agregar/agregar-producto/agregar-pro
     MatProgressSpinnerModule,
     TabsModule.forRoot(),
     NgbModule,
-    MatTableModule
+    MatTableModule,
+    NgSelect2Module
   ],
   providers: [
     MatDatepickerModule,
