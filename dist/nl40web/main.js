@@ -1932,7 +1932,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  editar-producto works!\n</p>\n"
+module.exports = "<app-navbar></app-navbar>\n<hr>\n<hr>\n\n<div class=\"container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto\" *ngIf=\"!cargando\">\n\n  <div class=\"row\">\n    <div class=\"col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left\">\n      <a role=\"button\" class=\"btn btn-outline-primary display-2\" (click)=\"return()\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Regresar\">\n        <mat-icon>arrow_back</mat-icon>\n      </a> \n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-lg-12 col-md-12 col-sm-12\">\n      <h1 class=\"display-4 inline-icon\">Editar producto</h1>\n    </div>\n  </div>\n  <hr>\n  <div class=\"row\">\n    <div class=\"col\">\n      <div class=\"container\">\n\n        <div class=\"row\">\n          <div class=\"col\">\n            \n            <form class=\"example-form\" [formGroup]=\"formProducto\" (ngSubmit)=\"save()\">\n                <div class=\"row\">\n                  <div class=\"col-lg-8 col-md-6 col-sm-12\">\n                    <mat-form-field class=\"w-100\">\n                      <input matInput placeholder=\"Nombre producto\" required formControlName=\"nombre_producto\">\n                    </mat-form-field>\n                    <div *ngIf=\"formProducto.get('nombre_producto').errors&&formProducto.get('nombre_producto').dirty\">\n                      <p *ngIf=\"formProducto.get('nombre_producto').hasError('required')\" class=\"text-danger\">Este campo es requerido</p>\n                      <p *ngIf=\"formProducto.get('nombre_producto').hasError('maxlength')\" class=\"text-danger\">Máximo 100 caracteres</p>\n                      <p *ngIf=\"formProducto.get('nombre_producto').hasError('pattern')\" class=\"text-danger\">No puede comenzar con espacio</p>\n                    </div>\n                  </div>\n                  <div class=\"col-lg-4 col-md-6 col-sm-12\">\n                    <mat-form-field class=\"w-100\">\n                      <mat-label>Tipo (Origen)</mat-label>\n                      <mat-select formControlName=\"tipo\" (selectionChange)=\"tipoProd()\" required>\n                        <mat-option *ngFor=\"let tipo of tipos\" [value]=\"tipo.id_tipo_prod\">{{tipo.tipo_producto}}</mat-option>\n                      </mat-select>\n                    </mat-form-field>\n                    <div *ngIf=\"formProducto.get('tipo').errors&&formProducto.get('tipo').dirty\">\n                      <p *ngIf=\"formProducto.get('tipo').hasError('required')\" class=\"text-danger\">Este campo es requerido</p>\n                    </div>\n                  </div>\n                </div>\n                <div class=\"row\">\n                  <div class=\"col-lg-12 col-md-12 col-sm-12\">\n                    <mat-form-field class=\"w-100\">\n                      <textarea matInput placeholder=\"Descripción del producto\" formControlName=\"descripcion_producto\" required></textarea>                \n                    </mat-form-field>\n                    <div *ngIf=\"formProducto.get('descripcion_producto').errors&&formProducto.get('descripcion_producto').dirty\">\n                      <p *ngIf=\"formProducto.get('descripcion_producto').hasError('required')\" class=\"text-danger\">Este campo es requerido</p>\n                      <p *ngIf=\"formProducto.get('descripcion_producto').hasError('maxlength')\" class=\"text-danger\">Máximo 500 caracteres</p>\n                      <p *ngIf=\"formProducto.get('descripcion_producto').hasError('pattern')\" class=\"text-danger\">No puede comenzar con espacio</p>\n                    </div>\n                  </div>\n                </div>\n                <div class=\"row\">\n                  <div class=\"col-lg-12 col-md-12 col-sm-12\">\n                    <mat-form-field class=\"w-100\">\n                      <mat-label>Tecnológias que utiliza el producto</mat-label>\n                      <mat-select multiple formControlName=\"tecnologias\" required>\n                        <mat-option *ngFor=\"let tec of tecnologias\" [value]=\"tec.id_cat_tec\">{{tec.nombre_tecnologias}}</mat-option>\n                      </mat-select>\n                    </mat-form-field>\n                    <div *ngIf=\"formProducto.get('tecnologias').errors&&formProducto.get('tecnologias').dirty\">\n                      <p *ngIf=\"formProducto.get('tecnologias').hasError('required')\" class=\"text-danger\">Este campo es requerido</p>\n                    </div>\n                  </div>\n                </div>\n        \n                <div class=\"row\" *ngIf=\"ocultar&&tercero\">\n                  <div class=\"col-lg-8 col-md-6 col-sm-12\">\n                    <mat-form-field class=\"w-100\">\n                      <input matInput placeholder=\"Marca del producto\" formControlName=\"marca\">\n                    </mat-form-field>\n                    <div *ngIf=\"formProducto.get('marca').errors&&formProducto.get('marca').dirty\">\n                      <p *ngIf=\"formProducto.get('marca').hasError('required')\" class=\"text-danger\">Este campo es requerido</p>\n                      <p *ngIf=\"formProducto.get('marca').hasError('maxlength')\" class=\"text-danger\">Máximo 100 caracteres</p>\n                      <p *ngIf=\"formProducto.get('marca').hasError('pattern')\" class=\"text-danger\">No puede comenzar con espacio</p>\n                    </div>\n                  </div>\n                  <div class=\"col-lg-4 col-md-6 col-sm-12\">\n                    <mat-form-field class=\"w-100\">\n                      <input matInput placeholder=\"Nivel de Partnership\" formControlName=\"nivel_partnership\">\n                    </mat-form-field>\n                    <div *ngIf=\"formProducto.get('nivel_partnership').errors&&formProducto.get('nivel_partnership').dirty\">\n                      <p *ngIf=\"formProducto.get('nivel_partnership').hasError('required')\" class=\"text-danger\">Este campo es requerido</p>\n                    </div>\n                  </div>\n                </div>\n        \n                <div class=\"row\" *ngIf=\"ocultar&&propio\">\n                  <div class=\"col-lg-12 col-md-12 col-sm-12\">\n                    <mat-form-field class=\"w-100\">\n                      <mat-label>Posicionamiento en el mercado del producto</mat-label>\n                      <mat-select formControlName=\"posicionamiento\">\n                        <mat-option *ngFor=\"let pos of poss\" [value]=\"pos.id_cat_pos\">{{pos.posicionamiento}}</mat-option>\n                      </mat-select>\n                    </mat-form-field>\n                    <div *ngIf=\"formProducto.get('posicionamiento').errors&&formProducto.get('posicionamiento').dirty\">\n                      <p *ngIf=\"formProducto.get('posicionamiento').hasError('required')\" class=\"text-danger\">Este campo es requerido</p>\n                    </div>\n                  </div>\n                </div>\n        \n                <div class=\"row\">\n                  <div class=\"col-lg-6 col-md-6 col-sm-12\">\n                    <mat-form-field class=\"w-100\">\n                      <input matInput placeholder=\"Caso de éxito\" formControlName=\"caso_exito\" required>\n                    </mat-form-field>\n                    <div *ngIf=\"formProducto.get('caso_exito').errors&&formProducto.get('caso_exito').dirty\">\n                      <p *ngIf=\"formProducto.get('caso_exito').hasError('required')\" class=\"text-danger\">Este campo es requerido</p>\n                      <p *ngIf=\"formProducto.get('caso_exito').hasError('pattern')\" class=\"text-danger\">No puede comenzar con espacio</p>\n                    </div>\n                  </div>\n                  <div class=\"col-lg-6 col-md-6 col-sm-12\">\n                    <mat-form-field class=\"w-100\">\n                      <input matInput placeholder=\"Referencia del producto en producción\" formControlName=\"referencia\" required>\n                    </mat-form-field>\n                    <div *ngIf=\"formProducto.get('referencia').errors&&formProducto.get('referencia').dirty\">\n                      <p *ngIf=\"formProducto.get('referencia').hasError('required')\" class=\"text-danger\">Este campo es requerido</p>\n                      <p *ngIf=\"formProducto.get('referencia').hasError('pattern')\" class=\"text-danger\">No puede comenzar con espacio</p>\n                    </div>\n                  </div>\n                </div>\n        \n                <div formArrayName=\"val_ind\">\n        \n                  <div *ngFor=\"let item of getValInd.controls; let pind = index\" [formGroupName]=\"pind\">\n                    <div class=\"row\" *ngIf=\"pind>0\">\n                      <div class=\"col text-right\">\n                        <button class=\"btn btn-outline-dark btn-sm ml-auto\" (click)=\"delIndVal(pind)\" type=\"button\"  data-toggle=\"tooltip\" data-placement=\"top\" title=\"Eliminar Value Driver\">\n                          <mat-icon>close</mat-icon>\n                        </button>\n                      </div>\n                    </div>\n                    <div class=\"row\">\n                      <div class=\"col-lg-6 col-md-6 col-sm-12\">\n                        <mat-form-field class=\"w-100\">\n                          <mat-label>Value Drivers</mat-label>\n                          <mat-select formControlName=\"value_driver\" (selectionChange)=\"getIL(pind,pind)\">\n                            <mat-option *ngFor=\"let v of vd\" [value]=\"v.id_value_divers\">{{v.value_driver}}</mat-option>\n                          </mat-select>\n                        </mat-form-field>\n                      </div>\n          \n                      <div class=\"col-lg-6 col-md-6 col-sm-12\">\n                        <mat-form-field class=\"w-100\">\n                          <mat-label>Industry Levers</mat-label>\n                          <mat-select formControlName=\"industry_lever\" multiple>\n                            <mat-option *ngFor=\"let i of il[pind]\" [value]=\"i.industry_levers\">{{i.industry_levers}}</mat-option>\n                          </mat-select>\n                        </mat-form-field>\n                      </div>\n                    </div>\n                  </div>\n                </div>\n        \n                <div class=\"row\" *ngIf=\"sc\">\n                  <div class=\"col\">\n                    <button class=\"btn btn-outline-primary btn-sm ml-auto\" (click)=\"addIndVal()\" type=\"button\"  data-toggle=\"tooltip\" data-placement=\"top\" title=\"Añadir Value driver\">\n                      <mat-icon>add_box</mat-icon>\n                    </button>\n                  </div>\n                </div>\n        \n                <div class=\"row\">\n                  <div class=\"col-12 text-right\">\n                    <button type=\"submit\" class=\"btn btn-success\" style=\"margin-left: 10px; width: 100px;\" [disabled]=\"formProducto.invalid\">Guardar</button>\n                  </div>\n                </div>\n        \n                <div class=\"row\">\n                  <div class=\"col-12 text-left\">\n                    <small class=\"text-danger\">*Campos requeridos<br>*Por el momento limitado a 5 value drivers por producto<br>*Inserción de productos uno por uno</small>\n                  </div>\n                </div>\n        \n                <div class=\"row\">\n                  <div class=\"offset-lg-5 col-lg-1 offset-md-5 col-md-1 offset-sm-4 col-sm-2\">\n                    <mat-spinner *ngIf=\"saving\"></mat-spinner>\n                    <h1 class=\"lead text-danger\" *ngIf=\"error\">Error en registro</h1>\n                  </div>\n                </div>\n                \n              </form>\n\n          </div>\n        </div>\n\n      </div>\n    </div>\n  </div>\n</div>\n\n<div class=\"container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto\" *ngIf=\"cargando\">\n  <div class=\"row\">\n    <div class=\"col\">\n        <h1 class=\"lead\">\n          Cargando datos . . .\n        </h1>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col\">\n        <mat-spinner class=\"mx-auto\"></mat-spinner>\n    </div>\n  </div>\n</div>\n<br>\n<hr>\n<br>\n<app-footer></app-footer>"
 
 /***/ }),
 
@@ -1948,12 +1948,236 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditarProductoComponent", function() { return EditarProductoComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var src_app_services_session_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/session.service */ "./src/app/services/session.service.ts");
+/* harmony import */ var src_app_services_productos_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/productos.service */ "./src/app/services/productos.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var src_app_services_catalogos_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/catalogos.service */ "./src/app/services/catalogos.service.ts");
+
+
+
+
+
+
 
 
 var EditarProductoComponent = /** @class */ (function () {
-    function EditarProductoComponent() {
+    function EditarProductoComponent(session, router, location, prods, fb, cats, activatedRoute) {
+        this.session = session;
+        this.router = router;
+        this.location = location;
+        this.prods = prods;
+        this.fb = fb;
+        this.cats = cats;
+        this.activatedRoute = activatedRoute;
+        this.il = new Array(4);
+        this.cargando = true;
+        this.saving = false;
+        this.error = false;
+        this.ocultar = false;
+        this.propio = false;
+        this.tercero = false;
+        this.guardado = false;
+        this.sc = true;
+        this.not_wss = /^\S/;
+        this.producto = null;
+        this.tec_prod = null;
+        this.tecs = [];
+        this.marca = "";
+        this.id_marca = "";
     }
     EditarProductoComponent.prototype.ngOnInit = function () {
+        this.getCats();
+        this.getProductoTable();
+    };
+    EditarProductoComponent.prototype.initForm = function () {
+        this.formProducto = this.fb.group({
+            nombre_producto: [this.producto.nombre, [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].maxLength(100), _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].pattern(this.not_wss)]],
+            tipo: [this.producto.fk_id_origen, [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required]],
+            descripcion_producto: [this.producto.descripcion, [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].maxLength(500), _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].pattern(this.not_wss)]],
+            tecnologias: [this.tecs, [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required]],
+            marca: [this.marca, [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].maxLength(100), _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].pattern(this.not_wss)]],
+            nivel_partnership: [this.producto.partnership, []],
+            posicionamiento: [this.producto.fk_id_posicionamiento, []],
+            val_ind: this.fb.array([
+                this.fb.group({
+                    value_driver: [null, [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required]],
+                    industry_lever: [null, [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required]]
+                })
+            ]),
+            caso_exito: [this.producto.caso_exito, [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].pattern(this.not_wss)]],
+            referencia: [this.producto.referencia, [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].pattern(this.not_wss)]],
+            fk_id_marca_nivelp: [this.producto.fk_id_marca_nivelp],
+            fk_id_posicionamiento: [this.producto.fk_id_posicionamiento],
+            id_producto: [this.producto.id_producto]
+        });
+        this.getIndVal();
+        this.cargando = false;
+    };
+    EditarProductoComponent.prototype.getCats = function () {
+        var _this = this;
+        this.cats.getTipoProd().subscribe(function (res) {
+            _this.tipos = res;
+        }, function (err) {
+            console.error(err);
+        });
+        this.cats.getTecnologias().subscribe(function (res) {
+            _this.tecnologias = res;
+        }, function (err) {
+            console.error(err);
+        });
+        this.cats.getNivelPS().subscribe(function (res) {
+            _this.niveles = res;
+        }, function (err) {
+            console.error(err);
+        });
+        this.cats.getPosicionamiento().subscribe(function (res) {
+            _this.poss = res;
+        }, function (err) {
+            console.error(err);
+        });
+        this.cats.getValueDrivers().subscribe(function (res) {
+            /*for (let index = 0; index < 5; index++) {
+              this.vd.push(res);
+            }*/
+            _this.vd = res;
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    EditarProductoComponent.prototype.tipoProd = function () {
+        this.ocultar = true;
+        if (this.formProducto.value.tipo !== 1) {
+            this.tercero = true;
+            this.propio = false;
+        }
+        else {
+            this.tercero = false;
+            this.propio = true;
+        }
+    };
+    EditarProductoComponent.prototype.save = function () {
+        var _this = this;
+        var temp = this.formProducto.value;
+        temp.empresa_id = this.session.getEmpresaId(),
+            temp.contacto_id = this.session.getContactoId();
+        //temp.industry_lever = temp.industry_lever.join(', ');
+        this.saving = true;
+        this.prods.update(temp).subscribe(function (res) {
+            console.log(res);
+            _this.saving = false;
+        }, function (err) { return console.log(err); });
+    };
+    EditarProductoComponent.prototype.finalizar = function () {
+        this.router.navigateByUrl('landing');
+    };
+    EditarProductoComponent.prototype.addOtro = function () {
+        document.getElementById('reset').click();
+        this.formProducto.enable();
+        this.ocultar = false;
+        this.propio = false;
+        this.tercero = false;
+        this.guardado = false;
+    };
+    Object.defineProperty(EditarProductoComponent.prototype, "getValInd", {
+        get: function () {
+            return this.formProducto.get('val_ind');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    EditarProductoComponent.prototype.addIndVal = function () {
+        var cntrs = this.formProducto.controls['val_ind'];
+        cntrs.push(this.fb.group({
+            value_driver: [null, [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required]],
+            industry_lever: [null, [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required]]
+        }));
+        if (this.formProducto.controls['val_ind'].length > 4) {
+            this.sc = false;
+        }
+    };
+    EditarProductoComponent.prototype.delIndVal = function (pind) {
+        var cntrs = this.formProducto.controls['val_ind'];
+        cntrs.removeAt(pind);
+        if (cntrs.length < 5) {
+            this.sc = true;
+        }
+    };
+    EditarProductoComponent.prototype.routerTo = function (r) {
+        this.router.navigateByUrl(r);
+    };
+    EditarProductoComponent.prototype.getIL = function (pid, index) {
+        var _this = this;
+        this.cats.getIndustryLevers(this.formProducto.value.val_ind[index].value_driver).subscribe(function (res) {
+            _this.il[pid] = res;
+        }, function (err) {
+        });
+    };
+    EditarProductoComponent.prototype.getIL2 = function (vd, pid) {
+        var _this = this;
+        this.cats.getIndustryLevers(vd).subscribe(function (res) {
+            _this.il[pid] = res;
+        }, function (err) {
+        });
+    };
+    EditarProductoComponent.prototype.return = function () {
+        this.location.back();
+    };
+    EditarProductoComponent.prototype.getProductoTable = function () {
+        var _this = this;
+        this.prods.getProductoTabla(+this.activatedRoute.snapshot.paramMap.get("id")).subscribe(function (res) {
+            _this.producto = res;
+            _this.getTecnologias(_this.producto.id_producto);
+            _this.ocultar = true;
+            if (_this.producto.fk_id_origen == 1) {
+                _this.propio = true;
+            }
+            else {
+                _this.getMarca(_this.producto.fk_id_marca_nivelp);
+                _this.tercero = true;
+            }
+            setTimeout(function () {
+                _this.initForm();
+            }, 1000);
+        }, function (err) {
+            console.error(err);
+        });
+    };
+    EditarProductoComponent.prototype.getTecnologias = function (id) {
+        var _this = this;
+        this.prods.getTecnologiaProducto(id).subscribe(function (res) {
+            res.forEach(function (e) {
+                _this.tecs.push(e.fk_id_tecnologia);
+            });
+        }, function (err) {
+            console.error(err);
+        });
+    };
+    EditarProductoComponent.prototype.getMarca = function (id) {
+        var _this = this;
+        this.prods.getMarca(id).subscribe(function (res) {
+            _this.marca = res.marca;
+        }, function (err) {
+            console.error(err);
+        });
+    };
+    EditarProductoComponent.prototype.getIndVal = function () {
+        var _this = this;
+        this.prods.getValIndTable(+this.activatedRoute.snapshot.paramMap.get("id")).subscribe(function (res) {
+            var temp = [
+                { value_driver: res[0].id_val, industry_lever: res[0].industry_levers.split(", ") }
+            ];
+            _this.getIL2(res[0].id_val, 0);
+            for (var i = 1; i < res.length; i++) {
+                if (!(res[i] == null)) {
+                    temp.push({ value_driver: res[i].id_val, industry_lever: res[i].industry_levers.split(", ") });
+                    _this.addIndVal();
+                    _this.getIL2(res[i].id_val, i);
+                }
+            }
+            _this.formProducto.patchValue({ val_ind: temp });
+        }, function (err) { return console.error(err); });
     };
     EditarProductoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1961,7 +2185,13 @@ var EditarProductoComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./editar-producto.component.html */ "./src/app/editar/editar-producto/editar-producto.component.html"),
             styles: [__webpack_require__(/*! ./editar-producto.component.css */ "./src/app/editar/editar-producto/editar-producto.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_session_service__WEBPACK_IMPORTED_MODULE_4__["SessionService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"],
+            src_app_services_productos_service__WEBPACK_IMPORTED_MODULE_5__["ProductosService"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormBuilder"],
+            src_app_services_catalogos_service__WEBPACK_IMPORTED_MODULE_7__["CatalogosService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
     ], EditarProductoComponent);
     return EditarProductoComponent;
 }());
@@ -3714,14 +3944,14 @@ var CatalogosService = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uri_port", function() { return uri_port; });
-var uri_port = {
-    url: "18.189.206.61",
-    port: "8080"
-};
 /*export const uri_port = {
-    url : "localhost",
-    port : "57042"
-}*/ 
+    url : "18.189.206.61",
+    port : "8080"
+}*/
+var uri_port = {
+    url: "localhost",
+    port: "57042"
+};
 
 
 /***/ }),
@@ -4014,8 +4244,23 @@ var ProductosService = /** @class */ (function () {
     ProductosService.prototype.delete = function (id) {
         return this.http.delete("http://" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].url + ":" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].port + "/api/producto/" + id);
     };
+    ProductosService.prototype.update = function (data) {
+        return this.http.put("http://" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].url + ":" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].port + "/api/producto", data);
+    };
     ProductosService.prototype.getValInd = function (id) {
         return this.http.get("http://" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].url + ":" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].port + "/api/val_ind/" + id);
+    };
+    ProductosService.prototype.getValIndTable = function (id) {
+        return this.http.get("http://" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].url + ":" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].port + "/api/valindtable/" + id);
+    };
+    ProductosService.prototype.getProductoTabla = function (id) {
+        return this.http.get("http://" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].url + ":" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].port + "/api/producto_tabla/" + id);
+    };
+    ProductosService.prototype.getTecnologiaProducto = function (id) {
+        return this.http.get("http://" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].url + ":" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].port + "/api/tecprod/" + id);
+    };
+    ProductosService.prototype.getMarca = function (id) {
+        return this.http.get("http://" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].url + ":" + _config__WEBPACK_IMPORTED_MODULE_3__["uri_port"].port + "/api/marca/" + id);
     };
     ProductosService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -4582,7 +4827,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<hr>\n<hr>\n\n<div class=\"container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto\" *ngIf=\"!cargando\">\n\n  <div class=\"row\">\n    <div class=\"col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left\">\n      <a role=\"button\" class=\"btn btn-outline-primary display-2\" (click)=\"return()\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Regresar\">\n        <mat-icon>arrow_back</mat-icon>\n      </a> \n    </div>\n    <div class=\"col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right\">\n      <a role=\"button\" class=\"btn btn-outline-primary display-2\" (click)=\"routerTo('agregar/producto')\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Agregar\">\n        <mat-icon>add</mat-icon>\n      </a> \n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-lg-12 col-md-12 col-sm-12\">\n      <h1 class=\"display-4 inline-icon\">Mis productos</h1>\n    </div>\n  </div>\n  <hr>\n  <div class=\"row\">\n    <div class=\"col\">\n      <div>\n        <tabset>\n          <tab heading=\"Todos\">\n            <br>\n            <table class=\"table\" *ngIf=\"tiene_prods\">\n              <thead>\n                <tr>\n                  <th scope=\"col\">#</th>\n                  <th scope=\"col\">Nombre producto</th>\n                  <th scope=\"col\">Descripción</th>\n                  <th scope=\"col\">Origen</th>\n                  <th scope=\"col\"></th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let p of productos; let inx = index;\">\n                  <th scope=\"row\">{{inx+1}}</th>\n                  <td>{{p.nombre}}</td>\n                  <td class=\"text-left\">{{p.descripcion}}</td>\n                  <td class=\"text-left\">{{p.origen}}</td>\n                  <td class=\"text-right\">\n                      <div class=\"btn-group btn-group-sm\" role=\"group\">\n                        <a role=\"button\" class=\"btn btn-outline-primary btn-sm\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Editar este producto\" routerLink='/producto/{{p.id_producto}}' routerLinkActive='active'>\n                          <mat-icon>remove_red_eye</mat-icon>\n                        </a>\n                        <a role=\"button\" class=\"btn btn-outline-danger btn-sm\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Eliminar este productos\" routerLink='/eliminar/producto/{{p.id_producto}}' routerLinkActive='active'>\n                          <mat-icon>delete_forever</mat-icon>\n                        </a>\n                      </div>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n            <div class=\"row\" *ngIf=\"!tiene_prods\">\n              <div class=\"col text-center\">\n                <p class=\"lead\">Sin productos registrados</p>\n              </div>\n            </div>\n          </tab>\n          <tab heading=\"Propios\">\n            <br>\n            <table class=\"table\">\n              <thead>\n                <tr>\n                  <th scope=\"col\">#</th>\n                  <th scope=\"col\">Nombre producto</th>\n                  <th scope=\"col\">Descripción</th>\n                  <th scope=\"col\">Posicionamiento</th>\n                  <th scope=\"col\"></th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let p of pp; let inx = index;\">\n                  <th scope=\"row\">{{inx+1}}</th>\n                  <td>{{p.nombre}}</td>\n                  <td class=\"text-left\">{{p.descripcion}}</td>\n                  <td class=\"text-left\">{{p.posicionamiento}}</td>\n                  <td class=\"text-right\">\n                      <div class=\"btn-group btn-group-sm\" role=\"group\">\n                        <a role=\"button\" class=\"btn btn-outline-primary btn-sm\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Ver este producto\" routerLink='/producto/{{p.id_producto}}' routerLinkActive='active'>\n                          <mat-icon>remove_red_eye</mat-icon>\n                        </a>\n                        <a role=\"button\" class=\"btn btn-outline-danger btn-sm\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Eliminar este productos\" routerLink='/eliminar/producto/{{p.id_producto}}' routerLinkActive='active'>\n                          <mat-icon>delete_forever</mat-icon>\n                        </a>\n                      </div>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n          </tab>\n          <tab heading=\"Terceros\">\n            <br> \n            <table class=\"table\">\n              <thead>\n                <tr>\n                  <th scope=\"col\">#</th>\n                  <th scope=\"col\">Nombre producto</th>\n                  <th scope=\"col\">Descripción</th>\n                  <th scope=\"col\">Marca</th>\n                  <th scope=\"col\">Partnership</th>\n                  <th scope=\"col\"></th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let p of pt; let inx = index;\">\n                  <th scope=\"row\">{{inx+1}}</th>\n                  <td>{{p.nombre}}</td>\n                  <td class=\"text-left\">{{p.descripcion}}</td>\n                  <td class=\"text-left\">{{p.marca}}</td>\n                  <td class=\"text-left\">{{p.partnership}}</td>\n                  <td class=\"text-right\">\n                      <div class=\"btn-group btn-group-sm\" role=\"group\">\n                        <a role=\"button\" class=\"btn btn-outline-primary btn-sm\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Editar este producto\" routerLink='/producto/{{p.id_producto}}' routerLinkActive='active'>\n                          <mat-icon>remove_red_eye</mat-icon>\n                        </a>\n                        <a role=\"button\" class=\"btn btn-outline-danger btn-sm\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Eliminar este productos\" routerLink='/eliminar/producto/{{p.id_producto}}' routerLinkActive='active'>\n                          <mat-icon>delete_forever</mat-icon>\n                        </a>\n                      </div>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n          </tab>\n        </tabset>\n      </div>\n    </div>\n  </div>\n</div>\n<br><br>\n<div class=\"container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto\" *ngIf=\"cargando\">\n  <div class=\"row\">\n    <div class=\"col\">\n        <h1 class=\"lead\">\n          Cargando datos . . .\n        </h1>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col\">\n        <mat-spinner class=\"mx-auto\"></mat-spinner>\n    </div>\n  </div>\n</div>\n<hr>\n<br>\n<app-footer></app-footer>"
+module.exports = "<app-navbar></app-navbar>\n<hr>\n<hr>\n\n<div class=\"container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto\" *ngIf=\"!cargando\">\n\n  <div class=\"row\">\n    <div class=\"col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left\">\n      <a role=\"button\" class=\"btn btn-outline-primary display-2\" (click)=\"return()\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Regresar\">\n        <mat-icon>arrow_back</mat-icon>\n      </a> \n    </div>\n    <div class=\"col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right\">\n      <a role=\"button\" class=\"btn btn-outline-primary display-2\" (click)=\"routerTo('agregar/producto')\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Agregar\">\n        <mat-icon>add</mat-icon>\n      </a> \n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-lg-12 col-md-12 col-sm-12\">\n      <h1 class=\"display-4 inline-icon\">Mis productos</h1>\n    </div>\n  </div>\n  <hr>\n  <div class=\"row\">\n    <div class=\"col\">\n      <div>\n        <tabset>\n          <tab heading=\"Todos\">\n            <br>\n            <table class=\"table\" *ngIf=\"tiene_prods\">\n              <thead>\n                <tr>\n                  <th scope=\"col\">#</th>\n                  <th scope=\"col\">Nombre producto</th>\n                  <th scope=\"col\">Descripción</th>\n                  <th scope=\"col\">Origen</th>\n                  <th scope=\"col\"></th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let p of productos; let inx = index;\">\n                  <th scope=\"row\">{{inx+1}}</th>\n                  <td>{{p.nombre}}</td>\n                  <td class=\"text-left\">{{p.descripcion}}</td>\n                  <td class=\"text-left\">{{p.origen}}</td>\n                  <td class=\"text-right\">\n                      <div class=\"btn-group btn-group-sm\" role=\"group\">\n                        <a role=\"button\" class=\"btn btn-outline-primary btn-sm\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Editar este producto\" routerLink='/editar/producto/{{p.id_producto}}' routerLinkActive='active'>\n                          <mat-icon>edit</mat-icon>\n                        </a>\n                        <a role=\"button\" class=\"btn btn-outline-danger btn-sm\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Eliminar este productos\" routerLink='/eliminar/producto/{{p.id_producto}}' routerLinkActive='active'>\n                          <mat-icon>delete_forever</mat-icon>\n                        </a>\n                      </div>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n            <div class=\"row\" *ngIf=\"!tiene_prods\">\n              <div class=\"col text-center\">\n                <p class=\"lead\">Sin productos registrados</p>\n              </div>\n            </div>\n          </tab>\n          <tab heading=\"Propios\">\n            <br>\n            <table class=\"table\">\n              <thead>\n                <tr>\n                  <th scope=\"col\">#</th>\n                  <th scope=\"col\">Nombre producto</th>\n                  <th scope=\"col\">Descripción</th>\n                  <th scope=\"col\">Posicionamiento</th>\n                  <th scope=\"col\"></th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let p of pp; let inx = index;\">\n                  <th scope=\"row\">{{inx+1}}</th>\n                  <td>{{p.nombre}}</td>\n                  <td class=\"text-left\">{{p.descripcion}}</td>\n                  <td class=\"text-left\">{{p.posicionamiento}}</td>\n                  <td class=\"text-right\">\n                      <div class=\"btn-group btn-group-sm\" role=\"group\">\n                        <a role=\"button\" class=\"btn btn-outline-primary btn-sm\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Ver este producto\" routerLink='/editar/producto/{{p.id_producto}}' routerLinkActive='active'>\n                          <mat-icon>edit</mat-icon>\n                        </a>\n                        <a role=\"button\" class=\"btn btn-outline-danger btn-sm\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Eliminar este productos\" routerLink='/eliminar/producto/{{p.id_producto}}' routerLinkActive='active'>\n                          <mat-icon>delete_forever</mat-icon>\n                        </a>\n                      </div>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n          </tab>\n          <tab heading=\"Terceros\">\n            <br> \n            <table class=\"table\">\n              <thead>\n                <tr>\n                  <th scope=\"col\">#</th>\n                  <th scope=\"col\">Nombre producto</th>\n                  <th scope=\"col\">Descripción</th>\n                  <th scope=\"col\">Marca</th>\n                  <th scope=\"col\">Partnership</th>\n                  <th scope=\"col\"></th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let p of pt; let inx = index;\">\n                  <th scope=\"row\">{{inx+1}}</th>\n                  <td>{{p.nombre}}</td>\n                  <td class=\"text-left\">{{p.descripcion}}</td>\n                  <td class=\"text-left\">{{p.marca}}</td>\n                  <td class=\"text-left\">{{p.partnership}}</td>\n                  <td class=\"text-right\">\n                      <div class=\"btn-group btn-group-sm\" role=\"group\">\n                        <a role=\"button\" class=\"btn btn-outline-primary btn-sm\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Editar este producto\" routerLink='/editar/producto/{{p.id_producto}}' routerLinkActive='active'>\n                          <mat-icon>edit</mat-icon>\n                        </a>\n                        <a role=\"button\" class=\"btn btn-outline-danger btn-sm\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Eliminar este productos\" routerLink='/eliminar/producto/{{p.id_producto}}' routerLinkActive='active'>\n                          <mat-icon>delete_forever</mat-icon>\n                        </a>\n                      </div>\n                  </td>\n                </tr>\n              </tbody>\n            </table>\n          </tab>\n        </tabset>\n      </div>\n    </div>\n  </div>\n</div>\n<br><br>\n<div class=\"container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto\" *ngIf=\"cargando\">\n  <div class=\"row\">\n    <div class=\"col\">\n        <h1 class=\"lead\">\n          Cargando datos . . .\n        </h1>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col\">\n        <mat-spinner class=\"mx-auto\"></mat-spinner>\n    </div>\n  </div>\n</div>\n<hr>\n<br>\n<app-footer></app-footer>"
 
 /***/ }),
 
@@ -4630,7 +4875,6 @@ var ProductosComponent = /** @class */ (function () {
             _this.pp = res.filter(function (f) { return f.origen == "Propio"; });
             _this.pt = res.filter(function (f) { return f.origen == "Tercero"; });
             _this.cargando = false;
-            console.log(res);
         }, function (err) {
             console.log(err);
         });
