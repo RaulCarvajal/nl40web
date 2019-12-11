@@ -18,7 +18,7 @@ export class InicioComponent implements OnInit {
     this.loged();
   }
 
-  private regstat = this.session.getRegStatus();
+  private regstat = this.session.getRegStatus(); 
 
   get progressNum(){
     switch (this.regstat) {

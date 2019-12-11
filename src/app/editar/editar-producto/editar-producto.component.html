@@ -1,3 +1,219 @@
-<p>
-  editar-producto works!
-</p>
+<app-navbar></app-navbar>
+<hr>
+<hr>
+
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="!cargando">
+
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">
+      <a role="button" class="btn btn-outline-primary display-2" (click)="return()" data-toggle="tooltip" data-placement="top" title="Regresar">
+        <mat-icon>arrow_back</mat-icon>
+      </a> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h1 class="display-4 inline-icon">Editar producto</h1>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <div class="container">
+
+        <div class="row">
+          <div class="col">
+            
+            <form class="example-form" [formGroup]="formProducto" (ngSubmit)="save()">
+                <div class="row">
+                  <div class="col-lg-8 col-md-6 col-sm-12">
+                    <mat-form-field class="w-100">
+                      <input matInput placeholder="Nombre producto" required formControlName="nombre_producto">
+                    </mat-form-field>
+                    <div *ngIf="formProducto.get('nombre_producto').errors&&formProducto.get('nombre_producto').dirty">
+                      <p *ngIf="formProducto.get('nombre_producto').hasError('required')" class="text-danger">Este campo es requerido</p>
+                      <p *ngIf="formProducto.get('nombre_producto').hasError('maxlength')" class="text-danger">Máximo 100 caracteres</p>
+                      <p *ngIf="formProducto.get('nombre_producto').hasError('pattern')" class="text-danger">No puede comenzar con espacio</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <mat-form-field class="w-100">
+                      <mat-label>Tipo (Origen)</mat-label>
+                      <mat-select formControlName="tipo" (selectionChange)="tipoProd()" required>
+                        <mat-option *ngFor="let tipo of tipos" [value]="tipo.id_tipo_prod">{{tipo.tipo_producto}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <div *ngIf="formProducto.get('tipo').errors&&formProducto.get('tipo').dirty">
+                      <p *ngIf="formProducto.get('tipo').hasError('required')" class="text-danger">Este campo es requerido</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <mat-form-field class="w-100">
+                      <textarea matInput placeholder="Descripción del producto" formControlName="descripcion_producto" required></textarea>                
+                    </mat-form-field>
+                    <div *ngIf="formProducto.get('descripcion_producto').errors&&formProducto.get('descripcion_producto').dirty">
+                      <p *ngIf="formProducto.get('descripcion_producto').hasError('required')" class="text-danger">Este campo es requerido</p>
+                      <p *ngIf="formProducto.get('descripcion_producto').hasError('maxlength')" class="text-danger">Máximo 500 caracteres</p>
+                      <p *ngIf="formProducto.get('descripcion_producto').hasError('pattern')" class="text-danger">No puede comenzar con espacio</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <mat-form-field class="w-100">
+                      <mat-label>Tecnológias que utiliza el producto</mat-label>
+                      <mat-select multiple formControlName="tecnologias" required>
+                        <mat-option *ngFor="let tec of tecnologias" [value]="tec.id_cat_tec">{{tec.nombre_tecnologias}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <div *ngIf="formProducto.get('tecnologias').errors&&formProducto.get('tecnologias').dirty">
+                      <p *ngIf="formProducto.get('tecnologias').hasError('required')" class="text-danger">Este campo es requerido</p>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="row" *ngIf="ocultar&&tercero">
+                  <div class="col-lg-8 col-md-6 col-sm-12">
+                    <mat-form-field class="w-100">
+                      <input matInput placeholder="Marca del producto" formControlName="marca">
+                    </mat-form-field>
+                    <div *ngIf="formProducto.get('marca').errors&&formProducto.get('marca').dirty">
+                      <p *ngIf="formProducto.get('marca').hasError('required')" class="text-danger">Este campo es requerido</p>
+                      <p *ngIf="formProducto.get('marca').hasError('maxlength')" class="text-danger">Máximo 100 caracteres</p>
+                      <p *ngIf="formProducto.get('marca').hasError('pattern')" class="text-danger">No puede comenzar con espacio</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <mat-form-field class="w-100">
+                      <input matInput placeholder="Nivel de Partnership" formControlName="nivel_partnership">
+                    </mat-form-field>
+                    <div *ngIf="formProducto.get('nivel_partnership').errors&&formProducto.get('nivel_partnership').dirty">
+                      <p *ngIf="formProducto.get('nivel_partnership').hasError('required')" class="text-danger">Este campo es requerido</p>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="row" *ngIf="ocultar&&propio">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <mat-form-field class="w-100">
+                      <mat-label>Posicionamiento en el mercado del producto</mat-label>
+                      <mat-select formControlName="posicionamiento">
+                        <mat-option *ngFor="let pos of poss" [value]="pos.id_cat_pos">{{pos.posicionamiento}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <div *ngIf="formProducto.get('posicionamiento').errors&&formProducto.get('posicionamiento').dirty">
+                      <p *ngIf="formProducto.get('posicionamiento').hasError('required')" class="text-danger">Este campo es requerido</p>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <mat-form-field class="w-100">
+                      <input matInput placeholder="Caso de éxito" formControlName="caso_exito" required>
+                    </mat-form-field>
+                    <div *ngIf="formProducto.get('caso_exito').errors&&formProducto.get('caso_exito').dirty">
+                      <p *ngIf="formProducto.get('caso_exito').hasError('required')" class="text-danger">Este campo es requerido</p>
+                      <p *ngIf="formProducto.get('caso_exito').hasError('pattern')" class="text-danger">No puede comenzar con espacio</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <mat-form-field class="w-100">
+                      <input matInput placeholder="Referencia del producto en producción" formControlName="referencia" required>
+                    </mat-form-field>
+                    <div *ngIf="formProducto.get('referencia').errors&&formProducto.get('referencia').dirty">
+                      <p *ngIf="formProducto.get('referencia').hasError('required')" class="text-danger">Este campo es requerido</p>
+                      <p *ngIf="formProducto.get('referencia').hasError('pattern')" class="text-danger">No puede comenzar con espacio</p>
+                    </div>
+                  </div>
+                </div>
+        
+                <div formArrayName="val_ind">
+        
+                  <div *ngFor="let item of getValInd.controls; let pind = index" [formGroupName]="pind">
+                    <div class="row" *ngIf="pind>0">
+                      <div class="col text-right">
+                        <button class="btn btn-outline-dark btn-sm ml-auto" (click)="delIndVal(pind)" type="button"  data-toggle="tooltip" data-placement="top" title="Eliminar Value Driver">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6 col-sm-12">
+                        <mat-form-field class="w-100">
+                          <mat-label>Value Drivers</mat-label>
+                          <mat-select formControlName="value_driver" (selectionChange)="getIL(pind,pind)">
+                            <mat-option *ngFor="let v of vd" [value]="v.id_value_divers">{{v.value_driver}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+          
+                      <div class="col-lg-6 col-md-6 col-sm-12">
+                        <mat-form-field class="w-100">
+                          <mat-label>Industry Levers</mat-label>
+                          <mat-select formControlName="industry_lever" multiple>
+                            <mat-option *ngFor="let i of il[pind]" [value]="i.industry_levers">{{i.industry_levers}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="row" *ngIf="sc">
+                  <div class="col">
+                    <button class="btn btn-outline-primary btn-sm ml-auto" (click)="addIndVal()" type="button"  data-toggle="tooltip" data-placement="top" title="Añadir Value driver">
+                      <mat-icon>add_box</mat-icon>
+                    </button>
+                  </div>
+                </div>
+        
+                <div class="row">
+                  <div class="col-12 text-right">
+                    <button type="submit" class="btn btn-success" style="margin-left: 10px; width: 100px;" [disabled]="formProducto.invalid">Guardar</button>
+                  </div>
+                </div>
+        
+                <div class="row">
+                  <div class="col-12 text-left">
+                    <small class="text-danger">*Campos requeridos<br>*Por el momento limitado a 5 value drivers por producto<br>*Inserción de productos uno por uno</small>
+                  </div>
+                </div>
+        
+                <div class="row">
+                  <div class="offset-lg-5 col-lg-1 offset-md-5 col-md-1 offset-sm-4 col-sm-2">
+                    <mat-spinner *ngIf="saving"></mat-spinner>
+                    <h1 class="lead text-danger" *ngIf="error">Error en registro</h1>
+                  </div>
+                </div>
+                
+              </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded w-100 m-auto" *ngIf="cargando">
+  <div class="row">
+    <div class="col">
+        <h1 class="lead">
+          Cargando datos . . .
+        </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <mat-spinner class="mx-auto"></mat-spinner>
+    </div>
+  </div>
+</div>
+<br>
+<hr>
+<br>
+<app-footer></app-footer>

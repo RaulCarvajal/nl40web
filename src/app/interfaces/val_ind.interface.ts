@@ -4,3 +4,8 @@ export interface val_ind {
     value_driver : string,
     industry_levers : string
 }
+
+export interface val_indTable {
+    id_val : number,
+    industry_levers : string
+}

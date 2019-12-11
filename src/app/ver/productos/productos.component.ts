@@ -39,7 +39,6 @@ export class ProductosComponent implements OnInit {
         this.pp = res.filter( f => f.origen == "Propio" );
         this.pt = res.filter( f => f.origen == "Tercero" );
         this.cargando = false;
-        console.log(res);
       },
       err => {
         console.log(err);

@@ -18,3 +18,22 @@ export interface producto{
     caso_exito : string,
     referencia : string
 }
+
+export interface producto_tabla{
+    id_producto : number,
+    fk_id_posicionamiento : number,
+    fk_id_empresa : number,
+    fk_id_origen : number,
+    fk_id_marca_nivelp: number,
+    nombre : string,
+    descripcion : string,
+    caso_exito : string,
+    referencia : string,
+    partnership : string
+}
+
+export interface producto_tecnologias{
+    fk_id_producto : number,
+    fk_id_tecnologia : number,
+    id_tec_prod : number
+}
